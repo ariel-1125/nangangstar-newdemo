@@ -26,6 +26,16 @@ a{color:#C9D0E6}a:hover{color:#FFFFFF}
 .stack .band{position:sticky;top:0}
 .band{box-shadow:0 -24px 48px rgba(0,0,0,.45)}
 .cap{position:absolute;right:16px;bottom:12px;font:400 11px/1 'Noto Sans TC',sans-serif;letter-spacing:.12em;color:rgba(238,240,246,.82);text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.life-img{opacity:0;transform:scale(1.04);transition:opacity 1.2s ease,transform 7s ease-out}
+.life-img.on{opacity:1;transform:scale(1)}
+.life-tag{position:absolute;left:20px;bottom:16px;font:300 12px/1 Jost,'Futura',sans-serif;letter-spacing:.4em;color:rgba(238,240,246,.9);text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.life-tab{position:relative;text-align:left;background:none;border:0;color:inherit;font:inherit;cursor:pointer;opacity:.5;transition:opacity .4s}
+.life-tab:hover,.life-tab.on{opacity:1}
+.life-bar{position:absolute;left:0;right:0;top:-1px;height:2px;background:rgba(238,240,246,0)}
+.life-bar i{display:block;height:100%;width:0;background:#EEF0F6}
+.life-tab.on .life-bar i{animation:lifebar 6s linear forwards}
+@keyframes lifebar{to{width:100%}}
+@media (prefers-reduced-motion:reduce){.life-img{transition:none;transform:none}.life-tab.on .life-bar i{animation:none;width:100%}}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 30px;font:500 15px/1 'Noto Sans TC',sans-serif;letter-spacing:.16em;border:0;cursor:pointer}
 .navlink{font:400 14px/1 'Noto Sans TC',sans-serif;letter-spacing:.14em;color:#C9D0E6;padding:12px 0}
 @media (max-width:820px){
@@ -33,6 +43,8 @@ a{color:#C9D0E6}a:hover{color:#FFFFFF}
  .two-col{grid-template-columns:minmax(0,1fr)!important}
  .facts{grid-template-columns:repeat(2,minmax(0,1fr))!important}
  .day{grid-template-columns:minmax(0,1fr)!important}
+ .day .life-tab{padding:24px 0 8px!important;border-left:0!important;border-top:1px solid rgba(238,240,246,.16)!important}
+ .day .life-tab:first-child{border-top:0!important}
  .shade-left{background:linear-gradient(180deg,rgba(7,10,18,0) 30%,rgba(7,10,18,.94) 78%)}
  .band-copy{justify-content:flex-end!important;padding:32px 20px!important}
  .num{font-size:120px!important}
@@ -201,11 +213,12 @@ a{color:#C9D0E6}a:hover{color:#FFFFFF}
 <h2 style="margin: 0; font-size: clamp(30px, 3vw, 42px); font-weight: 500; letter-spacing: .14em; line-height: 1.45; text-wrap: balance">一站疊合東區門戶迷人風采</h2>
 <p style="margin: 0; font-size: 16px; letter-spacing: .08em; color: #C9D0E6">讓遼闊不再遙遠，繁忙轉瞬為繁華</p>
 </div>
-<div style="position: relative; aspect-ratio: 16 / 7; max-width: 100%; overflow: hidden"><img class="fill-img" src="assets/img/aerial-dusk.webp" alt="黃昏空拍，南港之星與遠方台北101天際線"><span class="cap">空拍合成 示意圖</span></div>
+<div style="position: relative; aspect-ratio: 16 / 7; max-width: 100%; overflow: hidden; background: #0E1424">
+<sc-for list="{{slots}}" as="s"><img class="fill-img life-img {{s.cls}}" src="{{s.img}}" alt="{{s.alt}}" loading="lazy"></sc-for>
+<span class="life-tag">{{lifeTag}}</span><span class="cap">空拍合成 示意圖</span>
+</div>
 <div class="day" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid rgba(238,240,246,.16)">
-<div style="padding: 32px 32px 8px 0; display: flex; flex-direction: column; gap: 14px; min-width: 0"><p style="margin: 0; font-family: Jost, 'Futura', sans-serif; font-size: 12px; letter-spacing: .4em; color: #AEB6CC">MORNING</p><h3 style="margin: 0; font-size: 22px; font-weight: 500; letter-spacing: .2em">上午</h3><p style="margin: 0; font-size: 15px; line-height: 2; letter-spacing: .06em; color: #C9D0E6">循著台鐵高鐵與捷運，接軌城市的詩與遠方</p></div>
-<div style="padding: 32px 32px 8px; display: flex; flex-direction: column; gap: 14px; min-width: 0; border-left: 1px solid rgba(238,240,246,.16)"><p style="margin: 0; font-family: Jost, 'Futura', sans-serif; font-size: 12px; letter-spacing: .4em; color: #AEB6CC">NOON</p><h3 style="margin: 0; font-size: 22px; font-weight: 500; letter-spacing: .2em">午間</h3><p style="margin: 0; font-size: 15px; line-height: 2; letter-spacing: .06em; color: #C9D0E6">漫步南港CITYLINK，讓味蕾率先環遊世界</p></div>
-<div style="padding: 32px 0 8px 32px; display: flex; flex-direction: column; gap: 14px; min-width: 0; border-left: 1px solid rgba(238,240,246,.16)"><p style="margin: 0; font-family: Jost, 'Futura', sans-serif; font-size: 12px; letter-spacing: .4em; color: #AEB6CC">NIGHT</p><h3 style="margin: 0; font-size: 22px; font-weight: 500; letter-spacing: .2em">入夜</h3><p style="margin: 0; font-size: 15px; line-height: 2; letter-spacing: .06em; color: #C9D0E6">轉往經貿園區，購物、娛樂與日系風尚一次收入</p></div>
+<sc-for list="{{slots}}" as="s"><button type="button" class="life-tab {{s.cls}}" onClick="{{s.pick}}" aria-pressed="{{s.pressed}}" style="padding: {{s.pad}}; display: flex; flex-direction: column; gap: 14px; min-width: 0; border-left: {{s.border}}"><span class="life-bar"><i></i></span><span style="font-family: Jost, 'Futura', sans-serif; font-size: 12px; letter-spacing: .4em; color: #AEB6CC">{{s.en}}</span><span style="font-size: 22px; font-weight: 500; letter-spacing: .2em">{{s.zh}}</span><span style="font-size: 15px; line-height: 2; letter-spacing: .06em; color: #C9D0E6">{{s.text}}</span></button></sc-for>
 </div>
 </div>
 </section>
@@ -235,12 +248,41 @@ a{color:#C9D0E6}a:hover{color:#FFFFFF}
 </div>
 </template></x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#9AA6CF","options":["#9AA6CF","#D0743A","#C9B48A","#EEF0F6"]},"stackBanners":{"editor":"boolean","default":true},"$preview":{"width":1440,"height":7900}}'>
+const LIFE = [
+{ en: 'MORNING', zh: '上午', text: '循著台鐵高鐵與捷運，接軌城市的詩與遠方', img: 'assets/img/life-morning.webp', alt: '清晨空拍，晨光與薄霧中的南港之星與鐵道', pad: '32px 32px 8px 0', border: '0' },
+{ en: 'NOON', zh: '午間', text: '漫步南港CITYLINK，讓味蕾率先環遊世界', img: 'assets/img/life-noon.webp', alt: '正午空拍，藍天下的南港之星與城市街廓', pad: '32px 32px 8px', border: '1px solid rgba(238,240,246,.16)' },
+{ en: 'NIGHT', zh: '入夜', text: '轉往經貿園區，購物、娛樂與日系風尚一次收入', img: 'assets/img/life-night.webp', alt: '入夜空拍，燈火中的南港之星與台北101天際線', pad: '32px 0 8px 32px', border: '1px solid rgba(238,240,246,.16)' }
+];
+const LIFE_MS = 6000;
 class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { life: 0 };
+}
+componentDidMount() {
+this.startLife();
+}
+startLife() {
+clearInterval(this.lifeTimer);
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+this.lifeTimer = setInterval(() => this.setState(s => ({ life: (s.life + 1) % LIFE.length })), LIFE_MS);
+}
+pickLife(i) {
+this.setState({ life: i });
+this.startLife();
+}
 renderVals() {
 const stack = this.props.stackBanners ?? true;
+const cur = this.state.life;
 return {
 accent: this.props.accent ?? '#9AA6CF',
-stackCls: stack ? 'stack' : 'no-stack'
+stackCls: stack ? 'stack' : 'no-stack',
+lifeTag: LIFE[cur].en,
+slots: LIFE.map((d, i) => Object.assign({}, d, {
+cls: i === cur ? 'on' : '',
+pressed: i === cur ? 'true' : 'false',
+pick: () => this.pickLife(i)
+}))
 };
 }
 }
