@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>南港之星 銷控表</title>
+<title>南港之星 房型總覽</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -58,7 +58,7 @@ body{margin:0;background:#070A12}
 </a>
 <nav class="navx" aria-label="選房工具" style="display: flex; gap: 28px; font-size: 14px; letter-spacing: .12em">
 <a href="reserve.html" style="padding: 10px 0">線上選房</a>
-<a href="grid.html" aria-current="page" style="padding: 10px 0; color: #FFFFFF; box-shadow: inset 0 -1px 0 #FFFFFF">完整銷控表</a>
+<a href="grid.html" aria-current="page" style="padding: 10px 0; color: #FFFFFF; box-shadow: inset 0 -1px 0 #FFFFFF">房型總覽</a>
 <a href="order.html" style="padding: 10px 0">查詢預約單</a>
 </nav>
 <span style="font-family: Jost, sans-serif; font-size: 15px; letter-spacing: .12em; padding: 10px 16px; border: 1px solid rgba(238,240,246,.4); user-select: all">02-2709-5888</span>
@@ -67,8 +67,8 @@ body{margin:0;background:#070A12}
 <main style="max-width: 1440px; margin: 0 auto; padding: 40px clamp(16px, 3vw, 48px) 80px; display: flex; flex-direction: column; gap: 28px">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
 <div style="display: flex; flex-direction: column; gap: 10px">
-<p style="margin: 0; font-family: Jost, sans-serif; font-size: 12px; letter-spacing: .4em; color: #9AA6CF">SALES CONTROL</p>
-<h1 style="margin: 0; font-size: 30px; font-weight: 500; letter-spacing: .16em">銷控表</h1>
+<p style="margin: 0; font-family: Jost, sans-serif; font-size: 12px; letter-spacing: .4em; color: #9AA6CF">UNIT OVERVIEW</p>
+<h1 style="margin: 0; font-size: 30px; font-weight: 500; letter-spacing: .16em">房型總覽</h1>
 <p style="margin: 0; font-size: 14px; letter-spacing: .12em; color: #AEB6CC">本期開放 35F – 37F・共 135 戶｜08F – 34F 本期未開放</p>
 </div>
 <div class="lg" aria-label="圖例">
@@ -93,7 +93,7 @@ body{margin:0;background:#070A12}
 <sc-for list="{{towers}}" as="t" hint-placeholder-count="4">
 <section class="tw" aria-label="{{t.name}}">
 <h3>{{t.name}}<small>{{t.note}}</small></h3>
-<div class="sc" role="table" aria-label="{{t.name}}銷控" style="grid-template-columns: 48px repeat({{t.span}}, minmax(0, 1fr))">
+<div class="sc" role="table" aria-label="{{t.name}}房型總覽" style="grid-template-columns: 48px repeat({{t.span}}, minmax(0, 1fr))">
 <span class="h fl" role="columnheader">樓層</span>
 <sc-for list="{{t.codes}}" as="code" hint-placeholder-count="13"><span class="h" role="columnheader">{{code}}</span></sc-for>
 <sc-for list="{{t.flat}}" as="c" hint-placeholder-count="42">
@@ -104,12 +104,12 @@ body{margin:0;background:#070A12}
 </div>
 </section>
 </sc-for>
-<p style="margin: 0; font-size: 12px; line-height: 1.9; color: #8C95B0">坪數含主建物、附屬建物、共同使用部分，不含雨遮；價格為示意資料，實際以接待中心價目表（控台確認章）為準。銷控狀態每 30 秒同步一次，保留中戶別於 72 小時內未完成刷卡小訂即釋出。</p>
+<p style="margin: 0; font-size: 12px; line-height: 1.9; color: #8C95B0">坪數含主建物、附屬建物、共同使用部分，不含雨遮；價格為示意資料，實際以接待中心價目表（控台確認章）為準。戶別狀態每 30 秒同步一次，保留中戶別於 72 小時內未完成刷卡小訂即釋出。</p>
 </div>
 
 <aside class="side" style="position: sticky; top: 96px; display: flex; flex-direction: column; gap: 16px">
 <div style="padding: 20px; border: 1px solid rgba(238,240,246,.16); background: #0B1020; display: flex; flex-direction: column; gap: 14px">
-<p style="margin: 0; font-size: 12px; letter-spacing: .24em; color: #9AA6CF">本期銷控統計</p>
+<p style="margin: 0; font-size: 12px; letter-spacing: .24em; color: #9AA6CF">本期房型統計</p>
 <div class="stat">
 <span>樓層</span><span>可預約</span><span>保留中</span><span>已售</span>
 <sc-for list="{{stats}}" as="s" hint-placeholder-count="3">
@@ -132,7 +132,7 @@ body{margin:0;background:#070A12}
 <p style="margin: 0; font-size: 12px; line-height: 1.8; color: #8C95B0">將帶入此戶資料前往線上刷卡小訂 NT$100,000，完成後自動建立預約單。</p>
 </sc-if>
 <sc-if value="{{noPick}}" hint-placeholder-val="{{ true }}">
-<p style="margin: 0; font-size: 14px; line-height: 1.9; color: #AEB6CC">在左側銷控表點選白框的可預約戶別，這裡會顯示面積、總價與定金。</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.9; color: #AEB6CC">在左側房型總覽點選白框的可預約戶別，這裡會顯示面積、總價與定金。</p>
 </sc-if>
 </div>
 </aside>

@@ -202,7 +202,7 @@ o: Object.assign({}, o, { pingTxt: Number(o.ping).toFixed(2), priceTxt: Number(o
   buyerTxt: o.name ? o.name + ' ' + o.title : (s.b.name.trim() ? s.b.name.trim() + ' ' + s.b.title : '（請填寫訂購人資料）') }),
 needBuyer: this.needBuyer, b: s.b, bMr: s.b.title !== '小姐', bMs: s.b.title === '小姐',
 step2Cls: this.needBuyer ? 'now' : 'done', step2Txt: this.needBuyer ? '02 訂購資料' : '02 資料・簽名',
-backHref: o.from === 'grid' ? 'grid.html' : 'reserve.html', backTxt: o.from === 'grid' ? '返回銷控表重新選擇' : '返回修改預約資料',
+backHref: o.from === 'grid' ? 'grid.html' : 'reserve.html', backTxt: o.from === 'grid' ? '返回房型總覽重新選擇' : '返回修改預約資料',
 onBName: (e) => this.setB('name', e.target.value, 'bname'),
 onBTitle: (e) => this.setB('title', e.target.value, 'btitle'),
 onBPhone: (e) => this.setB('phone', e.target.value.replace(/\D/g, '').slice(0, 10), 'bphone'),

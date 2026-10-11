@@ -5,7 +5,7 @@
 ## 頁面
 - `index.html` 首頁
 - `reserve.html` 線上選房（35–37F）
-- `grid.html` 銷控表
+- `grid.html` 房型總覽
 - `order.html` 預約單（潤泰預售收款憑證格式）
 
 ## 部署到 GitHub Pages
