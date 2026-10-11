@@ -51,7 +51,7 @@ body{margin:0;background:#070A12}
 </helmet>
 
 <div class="gd" style="background: #070A12; color: #EEF0F6; font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif; min-height: 100vh">
-<header style="position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px clamp(16px, 3vw, 40px); background: rgba(7,10,18,.92); border-bottom: 1px solid rgba(238,240,246,.12)">
+<header style="position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px clamp(16px, 3vw, 40px); background: rgba(7,10,18,.97); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(238,240,246,.12)">
 <a href="index.html" aria-label="回首頁" style="display: flex; align-items: flex-end; gap: 12px; color: #EEF0F6">
 <span style="display: grid; grid-template-columns: repeat(2, 1fr); font-family: 'Noto Serif TC', serif; font-weight: 300; font-size: 20px; line-height: 1.15; letter-spacing: .08em"><span>南</span><span>港</span><span>之</span><span>星</span></span>
 <span style="font-family: Jost, Futura, sans-serif; font-size: 9px; letter-spacing: .3em; color: #AEB6CC; padding-bottom: 3px">VERTICAL<br>GALAXY</span>
@@ -85,7 +85,7 @@ body{margin:0;background:#070A12}
 <button type="button" class="{{g.cls}}" onClick="{{g.pick}}" aria-pressed="{{g.pressed}}">{{g.label}}</button>
 </sc-for>
 </div>
-<p style="margin: 0; font-size: 13px; color: #AEB6CC; letter-spacing: .06em">格內為戶別／房屋坪數／預定總價（萬元），點選可預約戶別即可帶入線上選房。</p>
+<p style="margin: 0; font-size: 13px; color: #AEB6CC; letter-spacing: .06em">格內為戶別／房屋坪數／預定總價（萬元），點選可預約戶別，即可直接預約並線上刷卡小訂。</p>
 </div>
 
 <div class="desk" style="display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 32px; align-items: start">
@@ -128,7 +128,8 @@ body{margin:0;background:#070A12}
 <span style="color: #8C95B0">預定總價</span><span style="text-align: right">{{pick.price}} 萬元</span>
 <span style="color: #8C95B0">定金總額</span><span style="text-align: right">{{pick.deposit}} 萬元（含小訂 10 萬）</span>
 </div>
-<a href="reserve.html" style="display: flex; align-items: center; justify-content: center; min-height: 52px; background: #EEF0F6; color: #070A12; font-size: 15px; font-weight: 500; letter-spacing: .2em">預約此戶</a>
+<button type="button" onClick="{{goPay}}" style="display: flex; align-items: center; justify-content: center; min-height: 52px; border: 0; background: #EEF0F6; color: #070A12; font: 500 15px 'Noto Sans TC', sans-serif; letter-spacing: .2em; cursor: pointer">預約此戶・線上刷卡</button>
+<p style="margin: 0; font-size: 12px; line-height: 1.8; color: #8C95B0">將帶入此戶資料前往線上刷卡小訂 NT$100,000，完成後自動建立預約單。</p>
 </sc-if>
 <sc-if value="{{noPick}}" hint-placeholder-val="{{ true }}">
 <p style="margin: 0; font-size: 14px; line-height: 1.9; color: #AEB6CC">在左側銷控表點選白框的可預約戶別，這裡會顯示面積、總價與定金。</p>
@@ -195,8 +196,15 @@ const pu = s.unit ? this.units.find((u) => u.id === s.unit) : null;
 return {
 segs, towers, stats,
 hasPick: !!pu, noPick: !pu, pickBorder: pu ? '#9AA6CF' : 'rgba(238,240,246,.16)',
-pick: pu ? { id: pu.id, type: names[pu.type], ping: pu.ping.toFixed(2), land: pu.land.toFixed(2), face: pu.face, price: this.fmt(pu.price), deposit: pu.type === 3 ? 70 : 50 } : {}
+pick: pu ? { id: pu.id, type: names[pu.type], ping: pu.ping.toFixed(2), land: pu.land.toFixed(2), face: pu.face, price: this.fmt(pu.price), deposit: pu.type === 3 ? 70 : 50 } : {},
+goPay: () => { if (pu) this.goPay(pu, names); }
 };
+}
+goPay(pu, names) {
+const order = { unitId: pu.id, code: pu.code, floor: pu.floor, type: pu.type, typeName: names[pu.type], ping: pu.ping, land: pu.land, price: pu.price,
+deposit: pu.type === 3 ? 70 : 50, face: pu.face, from: 'grid' };
+try { sessionStorage.setItem('ngs-order', JSON.stringify(order)); } catch (err) {}
+location.href = 'payment.html';
 }
 }
 </script>

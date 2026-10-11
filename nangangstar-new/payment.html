@@ -45,7 +45,7 @@ body{margin:0;background:#070A12}
 </helmet>
 
 <div class="pay" style="background: #070A12; color: #EEF0F6; font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif; min-height: 100vh">
-<header style="position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px clamp(16px, 3vw, 40px); background: rgba(7,10,18,.92); border-bottom: 1px solid rgba(238,240,246,.12)">
+<header style="position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px clamp(16px, 3vw, 40px); background: rgba(7,10,18,.97); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(238,240,246,.12)">
 <a href="index.html" aria-label="回首頁" style="display: flex; align-items: flex-end; gap: 12px; color: #EEF0F6">
 <span style="display: grid; grid-template-columns: repeat(2, 1fr); font-family: 'Noto Serif TC', serif; font-weight: 300; font-size: 20px; line-height: 1.15; letter-spacing: .08em"><span>南</span><span>港</span><span>之</span><span>星</span></span>
 <span style="font-family: Jost, Futura, sans-serif; font-size: 9px; letter-spacing: .3em; color: #AEB6CC; padding-bottom: 3px">VERTICAL<br>GALAXY</span>
@@ -67,7 +67,7 @@ body{margin:0;background:#070A12}
 <div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; letter-spacing: .14em; color: #AEB6CC">預約戶別</span><span style="font-family: Jost, sans-serif; font-size: 24px; letter-spacing: .06em">{{o.unitId}}</span></div>
 <div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; letter-spacing: .14em; color: #AEB6CC">房型・坪數</span><span style="font-size: 17px; letter-spacing: .08em">{{o.typeName}}・{{o.pingTxt}} 坪</span></div>
 <div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; letter-spacing: .14em; color: #AEB6CC">預定總價</span><span style="font-family: Jost, sans-serif; font-size: 20px">{{o.priceTxt}} 萬</span></div>
-<div style="grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; padding-top: 12px; border-top: 1px solid rgba(238,240,246,.18); font-size: 13px; color: #C9D0E6"><span>訂購人　{{o.name}} {{o.title}}</span><span>定金總額 {{o.deposit}} 萬（含本次小訂 10 萬，餘額 7 日內補足）</span></div>
+<div style="grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; padding-top: 12px; border-top: 1px solid rgba(238,240,246,.18); font-size: 13px; color: #C9D0E6"><span>訂購人　{{o.buyerTxt}}</span><span>定金總額 {{o.deposit}} 萬（含本次小訂 10 萬，餘額 7 日內補足）</span></div>
 </div>
 </div>
 </section>
@@ -75,7 +75,7 @@ body{margin:0;background:#070A12}
 <!-- 付款 -->
 <main style="padding: 40px clamp(20px, 4vw, 56px) 56px; display: flex; flex-direction: column; gap: 26px; min-width: 0">
 <ol class="steps" aria-label="預約進度">
-<li class="done">01 選房</li><li class="done">02 資料・簽名</li><li class="now" aria-current="step">03 線上刷卡</li><li>04 預約單</li>
+<li class="done">01 選房</li><li class="{{step2Cls}}">{{step2Txt}}</li><li class="now" aria-current="step">03 線上刷卡</li><li>04 預約單</li>
 </ol>
 
 <div role="note" style="padding: 12px 14px; border: 1px dashed rgba(231,182,107,.6); font-size: 13px; line-height: 1.8; color: #E7B66B">示意刷卡頁：不會實際扣款，請勿輸入真實卡號。可按「帶入測試卡」體驗流程。</div>
@@ -93,6 +93,16 @@ body{margin:0;background:#070A12}
 </div>
 
 <form onSubmit="{{pay}}" style="display: flex; flex-direction: column; gap: 16px" novalidate>
+<sc-if value="{{needBuyer}}" hint-placeholder-val="{{ false }}">
+<fieldset style="margin: 0; padding: 18px 18px 20px; border: 1px solid rgba(238,240,246,.18); display: flex; flex-direction: column; gap: 14px; min-width: 0">
+<legend style="padding: 0 8px; font-size: 13px; letter-spacing: .16em; color: #E7B66B">訂購人資料</legend>
+<div class="row2" style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 16px">
+<div class="fld"><label for="b-name">訂購人姓名</label><input id="b-name" class="{{err.bname}}" type="text" autocomplete="name" value="{{b.name}}" onInput="{{onBName}}" placeholder="王小明"></div>
+<div class="fld"><label for="b-title">稱謂</label><select id="b-title" onChange="{{onBTitle}}" style="height: 52px; padding: 0 12px; background: #0E1424; border: 1px solid rgba(238,240,246,.22); color: #EEF0F6; font: 400 16px 'Noto Sans TC', sans-serif; border-radius: 0"><option value="先生" selected="{{bMr}}">先生</option><option value="小姐" selected="{{bMs}}">小姐</option></select></div>
+</div>
+<div class="fld"><label for="b-phone">手機號碼</label><input id="b-phone" class="{{err.bphone}}" type="tel" inputmode="numeric" autocomplete="tel" value="{{b.phone}}" onInput="{{onBPhone}}" placeholder="0912345678" maxlength="10"></div>
+</fieldset>
+</sc-if>
 <div class="fld"><label for="c-name">持卡人姓名（英文，同卡片）</label><input id="c-name" class="{{err.name}}" type="text" autocomplete="off" value="{{f.name}}" onInput="{{onName}}" placeholder="WANG XIAO MING"></div>
 <div class="fld"><label for="c-num">信用卡卡號</label><input id="c-num" class="{{err.num}}" type="text" inputmode="numeric" autocomplete="off" value="{{f.num}}" onInput="{{onNum}}" placeholder="0000 0000 0000 0000" maxlength="19"></div>
 <div class="row2" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
@@ -105,7 +115,7 @@ body{margin:0;background:#070A12}
 </label>
 <sc-if value="{{errTxt}}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 0; font-size: 13px; color: #E07A5F">{{errTxt}}</p></sc-if>
 <button type="submit" style="min-height: 58px; border: 0; background: #E7B66B; color: #070A12; font-size: 16px; font-weight: 500; letter-spacing: .22em">確認付款 NT$100,000</button>
-<a href="reserve.html" style="align-self: center; font-size: 13px; letter-spacing: .12em; padding: 8px 0">返回修改預約資料</a>
+<a href="{{backHref}}" style="align-self: center; font-size: 13px; letter-spacing: .12em; padding: 8px 0">{{backTxt}}</a>
 </form>
 </sc-if>
 
@@ -148,19 +158,23 @@ constructor(props) {
 super(props);
 let o = null;
 try { o = JSON.parse(sessionStorage.getItem('ngs-order') || 'null'); } catch (err) {}
-this.order = Object.assign({}, SAMPLE, o || {});
-this.state = { step: 'form', f: { name: '', num: '', exp: '', cvc: '', agree: false }, err: {}, errTxt: '', left: 5 };
+this.order = o && o.unitId ? o : SAMPLE;
+this.needBuyer = !this.order.name;
+this.state = { step: 'form', f: { name: '', num: '', exp: '', cvc: '', agree: false }, b: { name: '', title: '先生', phone: '' }, err: {}, errTxt: '', left: 5 };
 }
 componentWillUnmount() { clearInterval(this.timer); }
+setB(k, v, ek) { this.setState({ b: Object.assign({}, this.state.b, { [k]: v }), err: Object.assign({}, this.state.err, { [ek]: '' }), errTxt: '' }); }
 setF(k, v) { this.setState({ f: Object.assign({}, this.state.f, { [k]: v }), err: Object.assign({}, this.state.err, { [k]: '' }), errTxt: '' }); }
 validate() {
-const f = this.state.f, num = f.num.replace(/\s/g, ''), err = {};
+const f = this.state.f, b = this.state.b, num = f.num.replace(/\s/g, ''), err = {};
+if (this.needBuyer && b.name.trim().length < 2) err.bname = 'bad';
+if (this.needBuyer && !/^09\d{8}$/.test(b.phone)) err.bphone = 'bad';
 if (f.name.trim().length < 2) err.name = 'bad';
 if (!/^\d{15,16}$/.test(num) || !luhn(num)) err.num = 'bad';
 const m = f.exp.match(/^(\d{2})\/(\d{2})$/), now = new Date();
 if (!m || +m[1] < 1 || +m[1] > 12 || new Date(2000 + +m[2], +m[1], 0) < new Date(now.getFullYear(), now.getMonth(), 1)) err.exp = 'bad';
 if (!/^\d{3,4}$/.test(f.cvc)) err.cvc = 'bad';
-const msgs = { name: '持卡人姓名', num: '卡號', exp: '有效期限', cvc: '安全碼' };
+const msgs = { bname: '訂購人姓名', bphone: '手機號碼（09 開頭 10 碼）', name: '持卡人姓名', num: '卡號', exp: '有效期限', cvc: '安全碼' };
 const bad = Object.keys(err).map((k) => msgs[k]);
 if (!f.agree) bad.push('同意刷卡授權');
 return { err, errTxt: bad.length ? '請確認：' + bad.join('、') : '' };
@@ -170,6 +184,8 @@ const f = this.state.f, num = f.num.replace(/\s/g, ''), t = new Date();
 const pad = (n) => String(n).padStart(2, '0');
 const r = { no: 'NGS' + String(t.getTime()).slice(-6), brand: brandOf(num), last4: num.slice(-4), auth: String(Math.floor(100000 + Math.random() * 900000)),
 time: t.getTime(), timeTxt: t.getFullYear() + '/' + pad(t.getMonth() + 1) + '/' + pad(t.getDate()) + ' ' + pad(t.getHours()) + ':' + pad(t.getMinutes()) };
+const b = this.state.b;
+if (this.needBuyer) this.order = Object.assign({}, this.order, { name: b.name.trim(), title: b.title, phone: b.phone, addr: '', sig: '' });
 try { sessionStorage.setItem('ngs-order', JSON.stringify(Object.assign({}, this.order, { paid: r }))); } catch (err) {}
 this.setState({ step: 'done', r, left: 5 });
 this.timer = setInterval(() => {
@@ -182,7 +198,14 @@ renderVals() {
 const s = this.state, o = this.order, f = s.f;
 const digits = f.num.replace(/\s/g, '');
 return {
-o: Object.assign({}, o, { pingTxt: Number(o.ping).toFixed(2), priceTxt: Number(o.price).toLocaleString('zh-TW') }),
+o: Object.assign({}, o, { pingTxt: Number(o.ping).toFixed(2), priceTxt: Number(o.price).toLocaleString('zh-TW'),
+  buyerTxt: o.name ? o.name + ' ' + o.title : (s.b.name.trim() ? s.b.name.trim() + ' ' + s.b.title : '（請填寫訂購人資料）') }),
+needBuyer: this.needBuyer, b: s.b, bMr: s.b.title !== '小姐', bMs: s.b.title === '小姐',
+step2Cls: this.needBuyer ? 'now' : 'done', step2Txt: this.needBuyer ? '02 訂購資料' : '02 資料・簽名',
+backHref: o.from === 'grid' ? 'grid.html' : 'reserve.html', backTxt: o.from === 'grid' ? '返回銷控表重新選擇' : '返回修改預約資料',
+onBName: (e) => this.setB('name', e.target.value, 'bname'),
+onBTitle: (e) => this.setB('title', e.target.value, 'btitle'),
+onBPhone: (e) => this.setB('phone', e.target.value.replace(/\D/g, '').slice(0, 10), 'bphone'),
 f, err: s.err, errTxt: s.errTxt, r: s.r || {},
 isForm: s.step === 'form', isPaying: s.step === 'paying', isDone: s.step === 'done',
 brand: digits ? brandOf(digits) : 'CARD',
@@ -194,7 +217,7 @@ onNum: (e) => this.setF('num', e.target.value.replace(/\D/g, '').slice(0, 16).re
 onExp: (e) => { const d = e.target.value.replace(/\D/g, '').slice(0, 4); this.setF('exp', d.length > 2 ? d.slice(0, 2) + '/' + d.slice(2) : d); },
 onCvc: (e) => this.setF('cvc', e.target.value.replace(/\D/g, '').slice(0, 4)),
 onAgree: (e) => this.setF('agree', e.target.checked),
-fillTest: () => this.setState({ f: { name: 'WANG XIAO MING', num: '4111 1111 1111 1111', exp: '12/' + String(new Date().getFullYear() + 3).slice(2), cvc: '123', agree: true }, err: {}, errTxt: '' }),
+fillTest: () => this.setState({ b: this.needBuyer ? { name: '王小明', title: '先生', phone: '0912345678' } : s.b, f: { name: 'WANG XIAO MING', num: '4111 1111 1111 1111', exp: '12/' + String(new Date().getFullYear() + 3).slice(2), cvc: '123', agree: true }, err: {}, errTxt: '' }),
 pay: (e) => {
 e.preventDefault();
 const v = this.validate();
