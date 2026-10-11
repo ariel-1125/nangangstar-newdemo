@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>南港之星 線上選房</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc><template>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;family=Noto+Serif+TC:wght@300;500&amp;display=swap">
+<style>
+body{margin:0;background:#070A12}
+a{color:#C9D0E6}a:hover{color:#FFFFFF}
+.rv *{box-sizing:border-box}
+.rv a{text-decoration:none}
+.rv button{font-family:inherit;cursor:pointer}
+.rv a:focus-visible,.rv button:focus-visible,.rv input:focus-visible,.rv select:focus-visible,.rv summary:focus-visible{outline:2px solid #EEF0F6;outline-offset:2px}
+.step{display:flex;flex-direction:column;gap:16px;padding:36px 0;border-top:1px solid rgba(238,240,246,.14)}
+.step-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.step-h h2{margin:0;font-size:22px;font-weight:500;letter-spacing:.14em}
+.step-n{font-family:Jost,Futura,sans-serif;font-size:13px;letter-spacing:.3em;color:#8C95B0}
+.opt{display:flex;justify-content:space-between;align-items:center;gap:16px;width:100%;min-height:76px;padding:16px 20px;background:#0E1424;border:1px solid rgba(238,240,246,.16);color:#EEF0F6;text-align:left}
+.opt:hover{border-color:rgba(238,240,246,.5)}
+.opt.on{border-color:#9AA6CF;background:#151D33;box-shadow:inset 3px 0 0 #9AA6CF}
+.opt.off{opacity:.38;cursor:not-allowed}
+.fl{flex:1 1 0;min-width:0;min-height:72px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#0E1424;border:1px solid rgba(238,240,246,.16);color:#EEF0F6}
+.fl.on{border-color:#9AA6CF;background:#151D33}
+.fld{display:flex;flex-direction:column;gap:8px;min-width:0}
+.fld label{font-size:13px;letter-spacing:.12em;color:#AEB6CC}
+.fld input,.fld select{height:48px;padding:0 14px;background:#0E1424;border:1px solid rgba(238,240,246,.22);color:#EEF0F6;font:400 15px 'Noto Sans TC',sans-serif;border-radius:0}
+.fld input::placeholder{color:#6F7894}
+.mk{position:absolute;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;border:2px solid #9AA6CF;background:rgba(154,166,207,.28);color:#070A12;font:600 10px Jost,sans-serif;display:flex;align-items:center;justify-content:center;padding:0}
+.mk.on{background:#D0743A;border-color:#D0743A;color:#FFFFFF;width:36px;height:36px;box-shadow:0 0 0 6px rgba(208,116,58,.25)}
+.mk.dim{background:rgba(120,120,120,.35);border-color:#8A8A8A;cursor:not-allowed}
+.band{position:absolute;border:2px solid #FFFFFF;background:rgba(255,255,255,.38);box-shadow:0 0 0 2px rgba(7,10,18,.55),0 0 22px rgba(255,255,255,.75)}
+.band-tag{position:absolute;transform:translate(-50%,-120%);padding:3px 8px;background:#FFFFFF;color:#070A12;font:600 11px Jost,sans-serif;letter-spacing:.12em;white-space:nowrap}
+details{border:1px solid rgba(238,240,246,.14);background:#0B1020}
+details+details{border-top:0}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:48px;padding:12px 16px;font-size:14px;letter-spacing:.08em;color:#DDE2F0}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'＋';color:#8C95B0}
+details[open] summary::after{content:'－'}
+.dt{padding:0 16px 16px;font-size:13px;line-height:1.9;color:#AEB6CC}
+.dt ol,.dt ul{margin:0;padding-left:1.3em}
+.tab{min-height:40px;padding:0 18px;background:rgba(7,10,18,.6);border:1px solid rgba(238,240,246,.3);color:#C9D0E6;font-size:13px;letter-spacing:.14em}
+.tab.on{background:#EEF0F6;color:#070A12;border-color:#EEF0F6}
+@media (max-width:900px){
+ .cols{flex-direction:column!important}
+ .vis{position:relative!important;top:auto!important;height:auto!important;flex:none!important;width:100%!important}
+ .grid2{grid-template-columns:minmax(0,1fr)!important}
+}
+@media (max-width:640px){header{padding:12px 16px!important;gap:10px!important}header>span:last-child{display:none!important}header nav{display:flex!important;gap:14px!important;font-size:13px!important;letter-spacing:.06em!important}}
+</style>
+</helmet>
+
+<div class="rv" style="background: #070A12; color: #EEF0F6; font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif; min-height: 100vh">
+
+<header style="position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px clamp(16px, 3vw, 40px); background: rgba(7,10,18,.92); border-bottom: 1px solid rgba(238,240,246,.12)">
+<a href="index.html" aria-label="回首頁" style="display: flex; align-items: flex-end; gap: 12px; color: #EEF0F6">
+<span style="display: grid; grid-template-columns: repeat(2, 1fr); font-family: 'Noto Serif TC', serif; font-weight: 300; font-size: 20px; line-height: 1.15; letter-spacing: .08em"><span>南</span><span>港</span><span>之</span><span>星</span></span>
+<span style="font-family: Jost, Futura, sans-serif; font-size: 9px; letter-spacing: .3em; color: #AEB6CC; padding-bottom: 3px">VERTICAL<br>GALAXY</span>
+</a>
+<nav class="navx" aria-label="選房工具" style="display: flex; gap: 28px; font-size: 14px; letter-spacing: .12em">
+<a href="grid.html" style="padding: 10px 0">完整銷控表</a>
+<a href="order.html" style="padding: 10px 0">查詢預約單</a>
+</nav>
+<span style="font-family: Jost, sans-serif; font-size: 15px; letter-spacing: .12em; padding: 10px 16px; border: 1px solid rgba(238,240,246,.4); user-select: all">02-2709-5888</span>
+</header>
+
+<div class="cols" style="display: flex; align-items: flex-start">
+
+<!-- 左：視覺區 -->
+<div class="vis" style="position: sticky; top: 73px; flex: 0 0 58%; height: calc(100vh - 73px); min-height: 560px; background: #0B0F1A; display: flex; flex-direction: column">
+<div style="display: flex; gap: 8px; padding: 16px 20px 0; flex-wrap: wrap; align-items: center">
+<button class="tab {{tabVideo}}" onClick="{{showVideo}}" type="button">樣品屋實景</button>
+<button class="tab {{tabExt}}" onClick="{{showExt}}" type="button">外觀・選樓層</button>
+<button class="tab {{tabPlan}}" onClick="{{showPlan}}" type="button">平面圖・選戶別</button>
+<span style="margin-left: auto; font-size: 12px; letter-spacing: .14em; color: #AEB6CC">本期開放 35F – 37F</span>
+</div>
+
+<sc-if value="{{isVideo}}" hint-placeholder-val="{{ false }}">
+<div style="margin: 16px 20px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px">
+<div style="position: relative; width: min(100%, calc(100vh - 230px), 760px); aspect-ratio: 1 / 1; background: #000">
+<video src="{{videoSrc}}" poster="{{videoPoster}}" autoplay muted loop playsinline preload="auto" aria-label="{{videoLabel}}" style="display: block; width: 100%; height: 100%; object-fit: contain"></video>
+<span style="position: absolute; right: 12px; top: 10px; font-size: 11px; letter-spacing: .12em; color: rgba(238,240,246,.9); text-shadow: 0 1px 6px rgba(0,0,0,.7)">樣品屋實拍＋公設 3D 示意</span>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center">
+<sc-for list="{{videoChips}}" as="v" hint-placeholder-count="3">
+<button class="tab {{v.cls}}" type="button" onClick="{{v.pick}}">{{v.name}}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isExt}}" hint-placeholder-val="{{ true }}">
+<div style="position: relative; flex: 1; margin: 16px 20px 20px; overflow: hidden; min-height: 0">
+<div style="position: relative; width: 100%; max-width: 100%; aspect-ratio: 1920 / 1280">
+<img src="assets/img/front-day.webp" alt="南港之星外觀日景渲染圖，三棟住宅塔樓頂部三層以黃框標示" style="position: absolute; inset: 0; width: 100%; height: 100%">
+<div class="band" style="left: 41.9%; top: 14.6%; width: 12.3%; height: 4.7%"></div>
+<div class="band" style="left: 55.2%; top: 14.6%; width: 12.8%; height: 4.7%"></div>
+<div class="band" style="left: 69.9%; top: 11.1%; width: 14.0%; height: 5.3%"></div>
+<span class="band-tag" style="left: 48%; top: 14.6%">35–37F</span>
+<span class="band-tag" style="left: 61.6%; top: 14.6%">35–37F</span>
+<span class="band-tag" style="left: 76.9%; top: 11.1%">35–37F</span>
+<span style="position: absolute; right: 12px; bottom: 10px; font-size: 11px; letter-spacing: .12em; color: rgba(238,240,246,.9); text-shadow: 0 1px 6px rgba(0,0,0,.7)">外觀 3D 示意圖</span>
+</div>
+<div style="position: absolute; left: 0; bottom: 0; right: 0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px">
+<div style="padding: 14px 18px; background: rgba(7,10,18,.82); max-width: 360px">
+<p style="margin: 0; font-family: Jost, sans-serif; font-size: 12px; letter-spacing: .32em; color: #E7B66B">35F – 37F</p>
+<p style="margin: 6px 0 0; font-size: 15px; letter-spacing: .1em; line-height: 1.7">本期開放頂層三個樓層選房<br><span style="font-size: 13px; color: #AEB6CC">白色亮框為開放樓層位置</span></p>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isPlan}}" hint-placeholder-val="{{ false }}">
+<div style="flex: 1; margin: 16px 20px 20px; display: flex; flex-direction: column; gap: 12px; min-height: 0">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px">
+<p style="margin: 0; font-size: 15px; letter-spacing: .12em">{{planTitle}}</p>
+<p style="margin: 0; font-size: 12px; letter-spacing: .1em; color: #AEB6CC">二十四～三十七層平面圖（35–37F 適用）</p>
+</div>
+<div style="position: relative; background: #FFFFFF; width: 100%; aspect-ratio: 1457 / 742; max-width: 100%">
+<img src="assets/img/plan-24-37F.webp" alt="二十四至三十七層平面圖" style="position: absolute; inset: 0; width: 100%; height: 100%">
+<sc-for list="{{markers}}" as="m" hint-placeholder-count="12">
+<button class="mk {{m.cls}}" type="button" style="left: {{m.x}}%; top: {{m.y}}%" onClick="{{m.pick}}" aria-label="{{m.label}}">{{m.code}}</button>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 18px; font-size: 12px; letter-spacing: .1em; color: #AEB6CC">
+<span style="display: flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; border-radius: 50%; border: 2px solid #9AA6CF; background: rgba(154,166,207,.28)"></span>可預約</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; border-radius: 50%; background: #D0743A"></span>已選擇</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; border-radius: 50%; border: 2px solid #8A8A8A; background: rgba(120,120,120,.35)"></span>已保留／已售</span>
+<span>平面圖僅供參考，以合約附圖為準</span>
+</div>
+<sc-if value="{{noFloor}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; padding: 14px 16px; background: #0E1424; font-size: 14px; color: #C9D0E6">請先在右側選擇房型與樓層，平面圖會標出可預約的戶別。</p>
+</sc-if>
+</div>
+</sc-if>
+</div>
+
+<!-- 右：步驟 -->
+<main style="flex: 1 1 0; min-width: 0; padding: 32px clamp(16px, 3vw, 48px) 80px">
+<div style="display: flex; flex-direction: column; gap: 10px; padding-bottom: 28px">
+<p style="margin: 0; font-family: Jost, sans-serif; font-size: 12px; letter-spacing: .4em; color: #9AA6CF">ONLINE RESERVATION</p>
+<h1 style="margin: 0; font-size: 30px; font-weight: 500; letter-spacing: .16em">預約您的南港之星</h1>
+<p style="margin: 0; font-size: 14px; letter-spacing: .14em; color: #AEB6CC">東區門戶　垂直微型城市｜本期開放 35F – 37F</p>
+</div>
+
+<!-- 01 房型 -->
+<section class="step" aria-labelledby="s1">
+<div class="step-h"><h2 id="s1">選擇房型</h2><span class="step-n">01</span></div>
+<sc-for list="{{types}}" as="t" hint-placeholder-count="3">
+<button class="opt {{t.cls}}" type="button" onClick="{{t.pick}}">
+<span style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 18px; letter-spacing: .14em">{{t.name}}</span><span style="font-size: 13px; color: #AEB6CC; letter-spacing: .06em">{{t.desc}}</span></span>
+<span style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px; text-align: right"><span style="font-family: Jost, sans-serif; font-size: 18px; letter-spacing: .04em">{{t.from}}</span><span style="font-size: 12px; color: #AEB6CC">35–37F 可預約 {{t.count}} 戶</span></span>
+</button>
+</sc-for>
+</section>
+
+<!-- 02 樓層 -->
+<section class="step" aria-labelledby="s2">
+<div class="step-h"><h2 id="s2">選擇樓層</h2><span class="step-n">02</span></div>
+<div style="display: flex; gap: 10px">
+<sc-for list="{{floors}}" as="f" hint-placeholder-count="3">
+<button class="fl {{f.cls}}" type="button" onClick="{{f.pick}}">
+<span style="font-family: Jost, sans-serif; font-weight: 300; font-size: 26px; letter-spacing: .06em">{{f.label}}</span>
+<span style="font-size: 12px; color: #AEB6CC">{{f.note}}</span>
+</button>
+</sc-for>
+</div>
+<p style="margin: 0; font-size: 13px; line-height: 1.8; color: #AEB6CC">本期開放頂層 35F、36F、37F，左側外觀圖以白色亮框標示開放樓層。</p>
+</section>
+
+<!-- 03 戶別 -->
+<section class="step" aria-labelledby="s3">
+<div class="step-h"><h2 id="s3">選擇戶別</h2><span class="step-n">03</span></div>
+<sc-if value="{{needTypeFloor}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; padding: 18px 20px; border: 1px dashed rgba(238,240,246,.25); font-size: 14px; color: #AEB6CC">選好房型與樓層後，這裡與左側平面圖會列出可預約的戶別。</p>
+</sc-if>
+<sc-if value="{{hasUnits}}" hint-placeholder-val="{{ false }}">
+<div class="grid2" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{units}}" as="u" hint-placeholder-count="4">
+<button class="opt {{u.cls}}" type="button" onClick="{{u.pick}}" style="min-height: 88px; flex-direction: column; align-items: stretch; gap: 8px">
+<span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-family: Jost, sans-serif; font-size: 18px; letter-spacing: .08em">{{u.id}}</span><span style="font-size: 12px; color: #AEB6CC">{{u.status}}</span></span>
+<span style="display: flex; justify-content: space-between; gap: 8px; font-size: 13px; color: #C9D0E6"><span>{{u.ping}} 坪・朝{{u.face}}</span><span style="font-family: Jost, sans-serif">{{u.price}} 萬</span></span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{hasPick}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 20px; background: #151D33; border: 1px solid #9AA6CF; display: flex; flex-direction: column; gap: 12px">
+<p style="margin: 0; font-size: 12px; letter-spacing: .24em; color: #9AA6CF">已選戶別</p>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px"><span style="font-family: Jost, sans-serif; font-size: 28px; letter-spacing: .06em">{{pick.id}}</span><span style="font-size: 15px; letter-spacing: .12em">{{pick.type}}</span></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px; font-size: 13px; color: #C9D0E6; font-variant-numeric: tabular-nums">
+<span>房屋面積　{{pick.ping}} 坪</span><span>土地面積　{{pick.land}} 坪</span>
+<span>座向　朝{{pick.face}}</span><span>預定總價　{{pick.price}} 萬元</span>
+<span>定金總額　{{pick.deposit}} 萬元</span><span>小訂　10 萬元</span>
+</div>
+<p style="margin: 0; font-size: 12px; color: #8C95B0">面積含主建物、附屬建物、共同使用部分，不含雨遮。價格為示意資料。</p>
+</div>
+</sc-if>
+</section>
+
+<!-- 04 訂購人資料 -->
+<section class="step" aria-labelledby="s4">
+<div class="step-h"><h2 id="s4">訂購人資料</h2><span class="step-n">04</span></div>
+<div class="grid2" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+<div class="fld"><label for="f-name">訂購人姓名</label><input id="f-name" type="text" autocomplete="name" placeholder="與身分證相同"></div>
+<div class="fld"><label for="f-title">稱謂</label><select id="f-title"><option>先生</option><option>小姐</option></select></div>
+<div class="fld"><label for="f-phone">聯絡電話（手機）</label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xxxxxxxx"></div>
+<div class="fld"><label for="f-mail">電子郵箱（選填）</label><input id="f-mail" type="email" autocomplete="email"></div>
+<div class="fld" style="grid-column: 1 / -1"><label for="f-addr">聯絡地址</label><input id="f-addr" type="text" autocomplete="street-address" placeholder="收款憑證與契約寄送地址"></div>
+<div class="fld"><label for="f-reason">購買原因</label><select id="f-reason"><option>請選擇</option><option>區域地段</option><option>交通動線</option><option>生活機能</option><option>公司品牌</option><option>產品規劃</option><option>格局規劃</option><option>施工品質</option><option>安全管理</option><option>公共設施</option><option>付款方式</option><option>投資理財</option><option>置產</option><option>換屋</option><option>地理環境（景觀）</option><option>其他</option></select></div>
+<div class="fld"><label for="f-visit">到接待中心刷卡時段</label><select id="f-visit"><option>請專人與我約時間</option><option>平日上午</option><option>平日下午</option><option>假日上午</option><option>假日下午</option></select></div>
+</div>
+<p style="margin: 0; font-size: 13px; line-height: 1.8; color: #AEB6CC">身分證字號不在線上填寫，簽約時請攜帶身分證正本與印章至接待中心辦理。</p>
+</section>
+
+<!-- 05 親筆簽名與預約須知 -->
+<section class="step" aria-labelledby="s5">
+<div class="step-h"><h2 id="s5">親筆簽名</h2><span class="step-n">05</span></div>
+<div style="position: relative; background: #F4F5F8; border: 1px solid rgba(238,240,246,.3)">
+<canvas width="720" height="220" aria-label="簽名欄，請用滑鼠或手指簽名" style="display: block; width: 100%; height: 190px; touch-action: none; cursor: crosshair" onPointerDown="{{sigDown}}" onPointerMove="{{sigMove}}" onPointerUp="{{sigUp}}" onPointerLeave="{{sigUp}}"></canvas>
+<sc-if value="{{sigEmpty}}" hint-placeholder-val="{{ true }}">
+<span style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; font-size: 15px; letter-spacing: .3em; color: #9AA0B2">請在此簽名</span>
+</sc-if>
+<button type="button" onClick="{{sigClear}}" style="position: absolute; top: 10px; right: 10px; min-height: 36px; padding: 0 14px; background: #FFFFFF; border: 1px solid #C9CCD6; color: #3A4256; font-size: 13px">清除</button>
+</div>
+
+<!-- 重點提醒：簽名正下方 -->
+<div style="padding: 20px; background: #0E1424; border: 1px solid rgba(231,182,107,.45); display: flex; flex-direction: column; gap: 12px">
+<p style="margin: 0; font-size: 15px; font-weight: 500; letter-spacing: .14em; color: #E7B66B">送出前請確認以下重點</p>
+<ol style="margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.75; color: #DDE2F0">
+<li>線上送出後保留戶別 72 小時，請於期限內至接待中心刷卡<strong>小訂新台幣 10 萬元</strong>，逾時戶別將釋出。</li>
+<li>小訂後 7 日內須至接待中心<strong>補足定金</strong>（一房、兩房 50 萬元；三房 70 萬元），並於約定日期<strong>簽訂正式契約</strong>。</li>
+<li>未於期限內補足定金，收款憑證即解除，<strong>已付定金全額退還</strong>；已補足但未於約定日期完成簽約，<strong>依民法第 249 條辦理，定金可能不予退還</strong>。</li>
+<li>契約書於簽約前提供<strong>至少 5 日審閱期</strong>；簽約時請攜帶收款憑證、身分證正本與印章。</li>
+<li>預約須經代銷及業主審核確認後方為成立；收款憑證不得轉售第三人。</li>
+</ol>
+</div>
+
+<!-- 細節：隱藏選單 -->
+<div>
+<details>
+<summary>預約到簽約的完整流程</summary>
+<div class="dt"><ol>
+<li>線上選房、填寫資料並親筆簽名後送出，系統保留戶別 72 小時。</li>
+<li>專人來電確認，您至接待中心刷卡小訂 10 萬元，建立預約單。</li>
+<li>代銷審核、業主審核通過後，列印正式預約單兩份，一份交您留存。</li>
+<li>您取回：契約審閱本、預約單、刷卡單收執聯、價目表。</li>
+<li>小訂後 7 日內補足定金；契約審閱 5 日以上後簽訂「房屋土地預定買賣契約書」。</li>
+<li>簽約後定金轉作房地價金之一部分，收款憑證收回作廢。</li>
+</ol></div>
+</details>
+<details>
+<summary>收款憑證（預約單）條款摘要</summary>
+<div class="dt"><ul>
+<li>收款憑證於繳付定金後生效；僅繳付部分定金者，須於補足日期前補足全額。</li>
+<li>未補足定金全額者，賣方退還原繳定金；未於簽約日期完成簽約者，依民法第 249 條辦理。</li>
+<li>簽約時須攜帶收款憑證、身分證正本與印章；如有缺漏應於指定期限內補齊，未補齊視同未完成簽約。</li>
+<li>訂購標的各項條款以雙方簽訂之正式「房屋土地預定買賣契約書」為準。</li>
+<li>收款憑證為臨時憑證，不得轉售第三人；雙方同意得以電子文件及電子簽章為之。</li>
+</ul></div>
+</details>
+<details>
+<summary>房屋土地預定買賣契約書重點</summary>
+<div class="dt"><ul>
+<li><strong>審閱期：</strong>契約簽訂前買方得攜回審閱，審閱期間至少 5 日。</li>
+<li><strong>履約擔保：</strong>本案採價金信託，由臺灣銀行承作，設立專款專用帳戶。</li>
+<li><strong>面積找補：</strong>面積以地政機關登記為準；不足部分賣方全部找補，超過部分買方找補以 2% 為限，交屋時無息結算；誤差超過 3% 買方得解除契約。</li>
+<li><strong>付款：</strong>除簽約款及開工款外，依工程進度付款，接獲書面通知後 7 日內繳款，每次間隔 20 日以上。</li>
+<li><strong>逾期付款：</strong>逾期 5 日仍未繳清，按逾期款每日萬分之二加計遲延利息。</li>
+<li><strong>廣告效力：</strong>廣告宣傳品及所載建材設備表、平面圖為契約之一部分。</li>
+</ul></div>
+</details>
+<details>
+<summary>個資告知事項</summary>
+<div class="dt"><p style="margin: 0">您同意潤泰創新國際股份有限公司於履行本預約及契約、公司登記業務範圍內，蒐集、處理及利用您所提供之個人資料，並瞭解本項同意符合「個人資料保護法」等法令規定。資料僅用於本案預約、聯繫與簽約作業。</p></div>
+</details>
+</div>
+
+<label for="f-agree" style="display: flex; align-items: flex-start; gap: 12px; min-height: 44px; padding: 4px 0; font-size: 14px; line-height: 1.7; color: #DDE2F0; cursor: pointer">
+<input id="f-agree" type="checkbox" checked="{{agree}}" onChange="{{toggleAgree}}" style="width: 22px; height: 22px; margin: 2px 0 0; flex: none; accent-color: #9AA6CF">
+<span>我已閱讀並同意上述重點提醒、收款憑證條款、契約書重點與個資告知事項。</span>
+</label>
+</section>
+
+<!-- 06 送出 -->
+<section class="step" aria-labelledby="s6">
+<div class="step-h"><h2 id="s6">確認送出</h2><span class="step-n">06</span></div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 20px; background: #0E1424; font-size: 14px; color: #C9D0E6; font-variant-numeric: tabular-nums">
+<div style="display: flex; justify-content: space-between; gap: 12px"><span>預約戶別</span><span style="color: #EEF0F6">{{sumUnit}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px"><span>預定總價</span><span style="color: #EEF0F6">{{sumPrice}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px"><span>定金總額（7 日內補足）</span><span style="color: #EEF0F6">{{sumDeposit}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(238,240,246,.14)"><span>到場刷卡小訂</span><span style="font-family: Jost, sans-serif; font-size: 22px; color: #EEF0F6">NT$100,000</span></div>
+</div>
+<sc-if value="{{missingTxt}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 13px; color: #E7B66B">{{missingTxt}}</p>
+</sc-if>
+<button type="button" onClick="{{submit}}" style="min-height: 56px; border: 0; background: {{btnBg}}; color: #070A12; font-size: 16px; font-weight: 500; letter-spacing: .24em">送出預約・保留戶別 72 小時</button>
+<sc-if value="{{submitted}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="padding: 18px 20px; border: 1px solid #9AA6CF; background: #151D33; font-size: 14px; line-height: 1.8">已送出示意預約：{{sumUnit}}。專人將來電確認到場刷卡時間，戶別保留至送出後 72 小時。<a href="order.html" style="margin-left: 8px; color: #FFFFFF; box-shadow: inset 0 -1px 0 #FFFFFF">查看預約單</a><br><span style="color: #AEB6CC">（設計稿示意，未實際送出資料）</span></div>
+</sc-if>
+</section>
+
+<footer style="padding-top: 28px; border-top: 1px solid rgba(238,240,246,.12); font-size: 12px; line-height: 2; letter-spacing: .06em; color: #8C95B0">
+<p style="margin: 0">｜投資興建：潤泰創新國際(股)｜建照號碼：111建字第0311號｜</p>
+<p style="margin: 0">｜經紀人證：凃美珍(93)北縣字第000962號(換發)｜建築代銷：新聯陽實業機構－新聯祥廣告｜</p>
+</footer>
+</main>
+</div>
+</div>
+</template></x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2600}}'>
+const VIDEOS = {
+1: { src: 'assets/video/room-1.mp4', poster: 'assets/img/room-1-poster.jpg' },
+2: { src: 'assets/video/room-2.mp4', poster: 'assets/img/room-2-poster.jpg' },
+3: { src: 'assets/video/room-3.mp4', poster: 'assets/img/room-3-poster.jpg' }
+};
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { type: null, floor: null, unit: null, view: 'video', vtype: 1, agree: false, sigEmpty: true, submitted: false, tried: false };
+this.drawing = false;
+this.canvas = null;
+const base = 'A1,3,42.54,3.32,5120,西北;A2,2,27.45,2.14,3190,北;A3,1,17.71,1.38,2080,北;A4,1,17.79,1.39,2090,北;A5,2,27.52,2.15,3220,北;A6,2+1,33.75,2.63,4020,東北;A7,2,26.97,2.1,3170,東;A8,2+1,34.22,2.67,4100,東南;A9,1,18.19,1.42,2120,南;A10,2,25.54,1.99,2970,南;A11,1,17.49,1.36,2060,南;A12,2,26.28,2.05,3080,南;A13,3,45.81,3.57,5480,西南;B1,3,43.11,3.36,5200,北;B2,2,27.16,2.12,3180,北;B3,1,17.36,1.35,2030,北;B4,1,17.5,1.36,2060,北;B5,2,26.87,2.1,3130,北;B6,2+1,32.9,2.57,3950,東北;B7,2,26.51,2.07,3110,東;B8,2+1,34.7,2.71,4170,東南;B9,1,17.93,1.4,2100,南;B10,1,17.5,1.36,2040,南;B11,2,25.73,2.01,3000,南;B12,2,26.33,2.05,3070,南;B13,3,46.26,3.61,5560,西南;B14,2,27.75,2.16,3230,西;C1,2+1,33.9,2.64,4090,北;C2,1,17.15,1.34,2010,北;C3,2,28.47,2.22,3350,北;C4,3,41.63,3.25,4970,東北;C5,1,17.91,1.4,2110,東;C6,1,17.9,1.4,2090,東;C7,1,17.79,1.39,2090,東;C8,2,24.64,1.92,2870,東;C9,2,25.23,1.97,2960,西;C10,1,18.2,1.42,2130,西;C11,2,24.95,1.95,2910,西;D1,2,25.49,1.99,2980,東;D2,3,44.7,3.49,5350,東南;D3,1,18.54,1.45,2170,南;D4,2,26.24,2.05,3080,南;D5,2+1,35.78,2.79,4280,西南;D6,3,45.31,3.53,5470,西;D7,1,19.26,1.5,2270,西';
+const d36 = [40,40,30,-20,10,30,-10,40,20,30,-10,-10,50,-30,20,10,-20,20,30,30,20,10,-10,40,10,-20,10,-20,10,10,90,-20,0,10,-10,10,10,30,30,20,0,0,10,-20,0];
+const d37 = [0,40,10,20,30,30,10,70,10,50,10,10,60,-20,30,50,10,40,20,10,20,20,0,30,30,40,40,-30,30,20,80,20,10,10,40,30,60,50,50,80,10,10,40,30,-20];
+const pos = {A1:[5.6,12.5],A2:[9.6,12.5],A3:[13.9,12.5],A4:[17.4,12.5],A5:[21.5,12.5],A6:[25.9,12.5],A7:[26.8,25.6],A8:[25.9,37.3],A9:[20.5,37.3],A10:[16.7,37.3],A11:[14.2,37.3],A12:[10.4,37.3],A13:[5.4,37.3],B1:[42.0,12.5],B2:[45.0,12.5],B3:[48.3,12.5],B4:[51.6,12.5],B5:[55.8,12.5],B6:[60.3,12.5],B7:[61.3,25.6],B8:[60.3,37.3],B9:[54.8,37.3],B10:[51.2,37.3],B11:[48.6,37.3],B12:[44.3,37.3],B13:[39.9,37.3],B14:[38.6,25.6],C1:[81.7,8.1],C2:[85.9,8.1],C3:[90.3,8.1],C4:[94.1,16.4],C5:[87.6,29.8],C6:[87.6,38.0],C7:[87.6,45.3],C8:[87.6,53.2],C9:[80.0,53.2],C10:[80.0,43.1],C11:[80.0,28.7],D1:[87.6,65.1],D2:[85.8,79.2],D3:[79.4,79.2],D4:[73.6,79.2],D5:[67.5,79.2],D6:[66.3,69.0],D7:[73.6,66.0]};
+const taken = {'A7-35F':'已售','C5-35F':'已售','D5-35F':'已售','C7-36F':'已售','A4-36F':'保留中','B14-36F':'保留中','C11-37F':'保留中'};
+const typeOf = (r) => (r === '1' ? 1 : r === '2' ? 2 : 3);
+this.units = [];
+base.split(';').forEach((row, i) => {
+const [code, r, ping, land, price, face] = row.split(',');
+[35, 36, 37].forEach((fl) => {
+const delta = fl === 36 ? d36[i] : fl === 37 ? d37[i] : 0;
+const id = code + '-' + fl + 'F';
+this.units.push({ id, code, floor: fl, type: typeOf(r), ping: +ping, land: +land, price: +price + delta, face, taken: taken[id] || null, x: pos[code][0], y: pos[code][1] });
+});
+});
+}
+fmt(n) { return n.toLocaleString('zh-TW'); }
+renderVals() {
+const s = this.state;
+const names = { 1: '一房', 2: '兩房', 3: '三房' };
+const descs = { 1: '17–19 坪・機能精緻，通勤效率首選', 2: '24–29 坪・雙人生活的完整尺度', 3: '33–46 坪・大面寬，三代同堂' };
+const open = this.units.filter((u) => !u.taken);
+const types = [1, 2, 3].map((t) => {
+const list = open.filter((u) => u.type === t);
+return { name: names[t], desc: descs[t], count: list.length, from: this.fmt(Math.min(...list.map((u) => u.price))) + ' 萬起',
+cls: s.type === t ? 'on' : '', pick: () => this.setState({ type: t, vtype: t, unit: null, submitted: false, view: 'video' }) };
+});
+const floors = [35, 36, 37].map((f) => {
+const n = open.filter((u) => u.floor === f && (!s.type || u.type === s.type)).length;
+return { label: f + 'F', note: (s.type ? names[s.type] + ' ' : '') + '可預約 ' + n + ' 戶', cls: s.floor === f ? 'on' : '',
+pick: () => this.setState({ floor: f, unit: null, submitted: false, view: 'plan' }) };
+});
+const onFloor = s.floor ? this.units.filter((u) => u.floor === s.floor) : [];
+const markers = onFloor.map((u) => {
+const match = !s.type || u.type === s.type;
+const on = s.unit === u.id;
+return { code: u.code, x: u.x, y: u.y, label: u.id + ' ' + names[u.type] + (u.taken ? ' ' + u.taken : ''),
+cls: on ? 'on' : (u.taken || !match ? 'dim' : ''),
+pick: () => { if (!u.taken && match) this.setState({ unit: u.id, type: u.type, submitted: false }); } };
+});
+const list = onFloor.filter((u) => s.type && u.type === s.type).map((u) => ({
+id: u.id, ping: u.ping.toFixed(2), face: u.face, price: this.fmt(u.price), status: u.taken || '可預約',
+cls: s.unit === u.id ? 'on' : (u.taken ? 'off' : ''),
+pick: () => { if (!u.taken) this.setState({ unit: u.id, submitted: false }); }
+}));
+const pu = s.unit ? this.units.find((u) => u.id === s.unit) : null;
+const pick = pu ? { id: pu.id, type: names[pu.type], ping: pu.ping.toFixed(2), land: pu.land.toFixed(2), face: pu.face, price: this.fmt(pu.price), deposit: pu.type === 3 ? 70 : 50 } : {};
+const missing = [];
+if (!pu) missing.push('選擇戶別');
+if (s.sigEmpty) missing.push('親筆簽名');
+if (!s.agree) missing.push('勾選同意');
+const ready = missing.length === 0;
+return {
+types, floors, markers, units: list, pick,
+tabVideo: s.view === 'video' ? 'on' : '', tabExt: s.view === 'ext' ? 'on' : '', tabPlan: s.view === 'plan' ? 'on' : '',
+isVideo: s.view === 'video', showVideo: () => this.setState({ view: 'video' }),
+videoSrc: VIDEOS[s.vtype].src, videoPoster: VIDEOS[s.vtype].poster, videoLabel: names[s.vtype] + '樣品屋實景影片',
+videoChips: [1, 2, 3].map((t) => ({ name: names[t], cls: s.vtype === t ? 'on' : '', pick: () => this.setState({ vtype: t }) })),
+isExt: s.view === 'ext', isPlan: s.view === 'plan',
+showExt: () => this.setState({ view: 'ext' }), showPlan: () => this.setState({ view: 'plan' }),
+planTitle: s.floor ? s.floor + 'F 平面圖' + (s.type ? '・' + names[s.type] + '戶別' : '') : '平面圖',
+noFloor: !s.floor,
+needTypeFloor: !s.type || !s.floor, hasUnits: !!(s.type && s.floor), hasPick: !!pu,
+sumUnit: pu ? pu.id + '　' + names[pu.type] + '　' + pu.ping.toFixed(2) + ' 坪' : '尚未選擇',
+sumPrice: pu ? this.fmt(pu.price) + ' 萬元' : '—',
+sumDeposit: pu ? (pu.type === 3 ? 70 : 50) + ' 萬元（含小訂 10 萬）' : '—',
+missingTxt: s.tried && !ready ? '尚未完成：' + missing.join('、') : '',
+btnBg: ready ? '#EEF0F6' : '#5B6278',
+submitted: s.submitted,
+agree: s.agree,
+toggleAgree: (e) => this.setState({ agree: e.target.checked }),
+sigEmpty: s.sigEmpty,
+sigDown: (e) => { this.canvas = e.currentTarget; this.drawing = true; const c = this.canvas.getContext('2d'); const p = this.pt(e); c.lineWidth = 3; c.lineCap = 'round'; c.lineJoin = 'round'; c.strokeStyle = '#141824'; c.beginPath(); c.moveTo(p.x, p.y); try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) {} },
+sigMove: (e) => { if (!this.drawing) return; const c = e.currentTarget.getContext('2d'); const p = this.pt(e); c.lineTo(p.x, p.y); c.stroke(); if (this.state.sigEmpty) this.setState({ sigEmpty: false }); },
+sigUp: () => { this.drawing = false; },
+sigClear: () => { if (this.canvas) this.canvas.getContext('2d').clearRect(0, 0, this.canvas.width, this.canvas.height); this.setState({ sigEmpty: true, submitted: false }); },
+submit: () => { if (ready) this.setState({ submitted: true, tried: true }); else this.setState({ tried: true }); }
+};
+}
+pt(e) {
+const el = e.currentTarget; const r = el.getBoundingClientRect();
+return { x: (e.clientX - r.left) * el.width / r.width, y: (e.clientY - r.top) * el.height / r.height };
+}
+}
+</script>
+</body>
+</html>

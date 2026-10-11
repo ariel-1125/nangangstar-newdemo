@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>南港之星 銷控表</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc><template>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&amp;family=Noto+Sans+TC:wght@300;400;500&amp;family=Noto+Serif+TC:wght@300;500&amp;display=swap">
+<style>
+body{margin:0;background:#070A12}
+.gd *{box-sizing:border-box}
+.gd a{text-decoration:none;color:#C9D0E6}
+.gd a:hover{color:#FFFFFF}
+.gd button{font-family:inherit;cursor:pointer}
+.gd a:focus-visible,.gd button:focus-visible{outline:2px solid #EEF0F6;outline-offset:2px}
+.seg{display:flex;border:1px solid rgba(238,240,246,.25)}
+.seg button{min-height:40px;padding:0 16px;background:transparent;border:0;color:#C9D0E6;font-size:13px;letter-spacing:.12em}
+.seg button+button{border-left:1px solid rgba(238,240,246,.14)}
+.seg button.on{background:#EEF0F6;color:#070A12}
+.tw{display:flex;flex-direction:column;gap:8px}
+.tw h3{margin:0;display:flex;align-items:baseline;gap:12px;font-size:15px;font-weight:500;letter-spacing:.16em}
+.tw h3 small{font:400 12px Jost,sans-serif;letter-spacing:.14em;color:#8C95B0}
+.sc{display:grid;gap:3px;width:100%}
+.sc .h{font:400 11px Jost,sans-serif;letter-spacing:.08em;color:#8C95B0;padding:4px 0;text-align:center;align-self:center}
+.sc .h.fl{text-align:right;padding-right:6px}
+.c{width:100%;min-height:56px;padding:5px 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;background:#0E1424;border:1px solid rgba(238,240,246,.42);color:#EEF0F6}
+.c .p{font:400 12px/1.25 Jost,sans-serif;font-variant-numeric:tabular-nums}
+.c .z{font:300 10px/1.3 Jost,sans-serif;color:#AEB6CC}
+.c.open:hover{background:#1A2238}
+.c.on{background:#D0743A;border-color:#D0743A;color:#FFFFFF}
+.c.on .z{color:#FFFFFF}
+.c.held{background:#5B6A8C;border-color:#5B6A8C;color:#0B0F1A;cursor:not-allowed}
+.c.held .z{color:#0B0F1A}
+.c.sold{background:#1B2130;border-color:#262D3E;color:#566079;cursor:not-allowed}
+.c.sold .z{color:#566079}
+.c.dim{opacity:.16}
+.closed{display:flex;align-items:center;justify-content:center;height:30px;background:repeating-linear-gradient(135deg,rgba(238,240,246,.04) 0 6px,transparent 6px 12px);border:1px dashed rgba(238,240,246,.14);font-size:12px;letter-spacing:.14em;color:#6F7894;text-align:center}
+.lg{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;letter-spacing:.1em;color:#AEB6CC}
+.lg i{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px}
+.stat{display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:8px 14px;font-size:13px;color:#C9D0E6;font-variant-numeric:tabular-nums}
+.stat span:nth-child(-n+4){font-size:12px;color:#8C95B0;letter-spacing:.1em}
+@media (max-width:1100px){.desk{grid-template-columns:minmax(0,1fr)!important}.side{position:static!important}}
+@media (max-width:820px){.tw{overflow-x:auto}.sc{min-width:760px}}
+@media (max-width:640px){header{padding:12px 16px!important;gap:10px!important}header>span:last-child{display:none!important}header nav{display:flex!important;gap:14px!important;font-size:13px!important;letter-spacing:.06em!important}}
+</style>
+</helmet>
+
+<div class="gd" style="background: #070A12; color: #EEF0F6; font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif; min-height: 100vh">
+<header style="position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px clamp(16px, 3vw, 40px); background: rgba(7,10,18,.92); border-bottom: 1px solid rgba(238,240,246,.12)">
+<a href="index.html" aria-label="回首頁" style="display: flex; align-items: flex-end; gap: 12px; color: #EEF0F6">
+<span style="display: grid; grid-template-columns: repeat(2, 1fr); font-family: 'Noto Serif TC', serif; font-weight: 300; font-size: 20px; line-height: 1.15; letter-spacing: .08em"><span>南</span><span>港</span><span>之</span><span>星</span></span>
+<span style="font-family: Jost, Futura, sans-serif; font-size: 9px; letter-spacing: .3em; color: #AEB6CC; padding-bottom: 3px">VERTICAL<br>GALAXY</span>
+</a>
+<nav class="navx" aria-label="選房工具" style="display: flex; gap: 28px; font-size: 14px; letter-spacing: .12em">
+<a href="reserve.html" style="padding: 10px 0">線上選房</a>
+<a href="grid.html" aria-current="page" style="padding: 10px 0; color: #FFFFFF; box-shadow: inset 0 -1px 0 #FFFFFF">完整銷控表</a>
+<a href="order.html" style="padding: 10px 0">查詢預約單</a>
+</nav>
+<span style="font-family: Jost, sans-serif; font-size: 15px; letter-spacing: .12em; padding: 10px 16px; border: 1px solid rgba(238,240,246,.4); user-select: all">02-2709-5888</span>
+</header>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 40px clamp(16px, 3vw, 48px) 80px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-family: Jost, sans-serif; font-size: 12px; letter-spacing: .4em; color: #9AA6CF">SALES CONTROL</p>
+<h1 style="margin: 0; font-size: 30px; font-weight: 500; letter-spacing: .16em">銷控表</h1>
+<p style="margin: 0; font-size: 14px; letter-spacing: .12em; color: #AEB6CC">本期開放 35F – 37F・共 135 戶｜08F – 34F 本期未開放</p>
+</div>
+<div class="lg" aria-label="圖例">
+<span><i style="border: 1px solid rgba(238,240,246,.6); background: #0E1424"></i>可預約</span>
+<span><i style="background: #5B6A8C"></i>保留中</span>
+<span><i style="background: #1B2130; border: 1px solid #39425A"></i>已售</span>
+<span><i style="background: #D0743A"></i>已選擇</span>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px">
+<div class="seg" role="group" aria-label="房型篩選">
+<sc-for list="{{segs}}" as="g" hint-placeholder-count="4">
+<button type="button" class="{{g.cls}}" onClick="{{g.pick}}" aria-pressed="{{g.pressed}}">{{g.label}}</button>
+</sc-for>
+</div>
+<p style="margin: 0; font-size: 13px; color: #AEB6CC; letter-spacing: .06em">格內為戶別／房屋坪數／預定總價（萬元），點選可預約戶別即可帶入線上選房。</p>
+</div>
+
+<div class="desk" style="display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 32px; align-items: start">
+<div style="display: flex; flex-direction: column; gap: 28px; min-width: 0">
+<sc-for list="{{towers}}" as="t" hint-placeholder-count="4">
+<section class="tw" aria-label="{{t.name}}">
+<h3>{{t.name}}<small>{{t.note}}</small></h3>
+<div class="sc" role="table" aria-label="{{t.name}}銷控" style="grid-template-columns: 48px repeat({{t.span}}, minmax(0, 1fr))">
+<span class="h fl" role="columnheader">樓層</span>
+<sc-for list="{{t.codes}}" as="code" hint-placeholder-count="13"><span class="h" role="columnheader">{{code}}</span></sc-for>
+<sc-for list="{{t.flat}}" as="c" hint-placeholder-count="42">
+<sc-if value="{{c.isFloor}}" hint-placeholder-val="{{ false }}"><span class="h fl" role="rowheader">{{c.floor}}</span></sc-if>
+<sc-if value="{{c.isCell}}" hint-placeholder-val="{{ true }}"><button type="button" class="c {{c.cls}}" onClick="{{c.pick}}" aria-label="{{c.label}}" aria-pressed="{{c.pressed}}"><span class="p">{{c.price}}</span><span class="z">{{c.ping}}</span></button></sc-if>
+</sc-for>
+<span class="h fl" style="font-size: 10px">08–34F</span><span class="closed" style="grid-column: 2 / -1">本期未開放</span>
+</div>
+</section>
+</sc-for>
+<p style="margin: 0; font-size: 12px; line-height: 1.9; color: #8C95B0">坪數含主建物、附屬建物、共同使用部分，不含雨遮；價格為示意資料，實際以接待中心價目表（控台確認章）為準。銷控狀態每 30 秒同步一次，保留中戶別於 72 小時內未完成刷卡小訂即釋出。</p>
+</div>
+
+<aside class="side" style="position: sticky; top: 96px; display: flex; flex-direction: column; gap: 16px">
+<div style="padding: 20px; border: 1px solid rgba(238,240,246,.16); background: #0B1020; display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-size: 12px; letter-spacing: .24em; color: #9AA6CF">本期銷控統計</p>
+<div class="stat">
+<span>樓層</span><span>可預約</span><span>保留中</span><span>已售</span>
+<sc-for list="{{stats}}" as="s" hint-placeholder-count="3">
+<span style="font-family: Jost, sans-serif">{{s.floor}}</span><span>{{s.open}}</span><span>{{s.held}}</span><span>{{s.sold}}</span>
+</sc-for>
+</div>
+</div>
+<div style="padding: 20px; border: 1px solid {{pickBorder}}; background: #151D33; display: flex; flex-direction: column; gap: 12px">
+<p style="margin: 0; font-size: 12px; letter-spacing: .24em; color: #9AA6CF">已選戶別</p>
+<sc-if value="{{hasPick}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px"><span style="font-family: Jost, sans-serif; font-size: 28px; letter-spacing: .06em">{{pick.id}}</span><span style="font-size: 15px; letter-spacing: .12em">{{pick.type}}</span></div>
+<div style="display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; font-size: 13px; color: #C9D0E6; font-variant-numeric: tabular-nums">
+<span style="color: #8C95B0">房屋面積</span><span style="text-align: right">{{pick.ping}} 坪</span>
+<span style="color: #8C95B0">土地面積</span><span style="text-align: right">{{pick.land}} 坪</span>
+<span style="color: #8C95B0">座向</span><span style="text-align: right">朝{{pick.face}}</span>
+<span style="color: #8C95B0">預定總價</span><span style="text-align: right">{{pick.price}} 萬元</span>
+<span style="color: #8C95B0">定金總額</span><span style="text-align: right">{{pick.deposit}} 萬元（含小訂 10 萬）</span>
+</div>
+<a href="reserve.html" style="display: flex; align-items: center; justify-content: center; min-height: 52px; background: #EEF0F6; color: #070A12; font-size: 15px; font-weight: 500; letter-spacing: .2em">預約此戶</a>
+</sc-if>
+<sc-if value="{{noPick}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 14px; line-height: 1.9; color: #AEB6CC">在左側銷控表點選白框的可預約戶別，這裡會顯示面積、總價與定金。</p>
+</sc-if>
+</div>
+</aside>
+</div>
+
+<footer style="padding-top: 28px; border-top: 1px solid rgba(238,240,246,.12); font-size: 12px; line-height: 2; letter-spacing: .06em; color: #8C95B0">
+<p style="margin: 0">｜投資興建：潤泰創新國際(股)｜建照號碼：111建字第0311號｜</p>
+<p style="margin: 0">｜經紀人證：凃美珍(93)北縣字第000962號(換發)｜建築代銷：新聯陽實業機構－新聯祥廣告｜</p>
+</footer>
+</main>
+</div>
+</template></x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { type: 0, unit: null };
+const base = 'A1,3,42.54,3.32,5120,西北;A2,2,27.45,2.14,3190,北;A3,1,17.71,1.38,2080,北;A4,1,17.79,1.39,2090,北;A5,2,27.52,2.15,3220,北;A6,2+1,33.75,2.63,4020,東北;A7,2,26.97,2.1,3170,東;A8,2+1,34.22,2.67,4100,東南;A9,1,18.19,1.42,2120,南;A10,2,25.54,1.99,2970,南;A11,1,17.49,1.36,2060,南;A12,2,26.28,2.05,3080,南;A13,3,45.81,3.57,5480,西南;B1,3,43.11,3.36,5200,北;B2,2,27.16,2.12,3180,北;B3,1,17.36,1.35,2030,北;B4,1,17.5,1.36,2060,北;B5,2,26.87,2.1,3130,北;B6,2+1,32.9,2.57,3950,東北;B7,2,26.51,2.07,3110,東;B8,2+1,34.7,2.71,4170,東南;B9,1,17.93,1.4,2100,南;B10,1,17.5,1.36,2040,南;B11,2,25.73,2.01,3000,南;B12,2,26.33,2.05,3070,南;B13,3,46.26,3.61,5560,西南;B14,2,27.75,2.16,3230,西;C1,2+1,33.9,2.64,4090,北;C2,1,17.15,1.34,2010,北;C3,2,28.47,2.22,3350,北;C4,3,41.63,3.25,4970,東北;C5,1,17.91,1.4,2110,東;C6,1,17.9,1.4,2090,東;C7,1,17.79,1.39,2090,東;C8,2,24.64,1.92,2870,東;C9,2,25.23,1.97,2960,西;C10,1,18.2,1.42,2130,西;C11,2,24.95,1.95,2910,西;D1,2,25.49,1.99,2980,東;D2,3,44.7,3.49,5350,東南;D3,1,18.54,1.45,2170,南;D4,2,26.24,2.05,3080,南;D5,2+1,35.78,2.79,4280,西南;D6,3,45.31,3.53,5470,西;D7,1,19.26,1.5,2270,西';
+const d36 = [40,40,30,-20,10,30,-10,40,20,30,-10,-10,50,-30,20,10,-20,20,30,30,20,10,-10,40,10,-20,10,-20,10,10,90,-20,0,10,-10,10,10,30,30,20,0,0,10,-20,0];
+const d37 = [0,40,10,20,30,30,10,70,10,50,10,10,60,-20,30,50,10,40,20,10,20,20,0,30,30,40,40,-30,30,20,80,20,10,10,40,30,60,50,50,80,10,10,40,30,-20];
+const taken = {'A7-35F':'已售','C5-35F':'已售','D5-35F':'已售','C7-36F':'已售','A4-36F':'保留中','B14-36F':'保留中','C11-37F':'保留中'};
+const typeOf = (r) => (r === '1' ? 1 : r === '2' ? 2 : 3);
+this.units = [];
+base.split(';').forEach((row, i) => {
+const [code, r, ping, land, price, face] = row.split(',');
+[37, 36, 35].forEach((fl) => {
+const delta = fl === 36 ? d36[i] : fl === 37 ? d37[i] : 0;
+const id = code + '-' + fl + 'F';
+this.units.push({ id, code, tower: code[0], floor: fl, type: typeOf(r), ping: +ping, land: +land, price: +price + delta, face, taken: taken[id] || null });
+});
+});
+}
+fmt(n) { return n.toLocaleString('zh-TW'); }
+renderVals() {
+const s = this.state;
+const names = { 1: '一房', 2: '兩房', 3: '三房' };
+const segs = [[0, '全部'], [1, '一房'], [2, '兩房'], [3, '三房']].map(([t, label]) => ({
+label, cls: s.type === t ? 'on' : '', pressed: s.type === t ? 'true' : 'false', pick: () => this.setState({ type: t }) }));
+const cellOf = (u) => {
+const match = !s.type || u.type === s.type;
+const state = u.taken === '已售' ? 'sold' : u.taken ? 'held' : 'open';
+const on = s.unit === u.id;
+return { price: this.fmt(u.price), ping: u.ping.toFixed(2) + '坪',
+cls: (on ? 'on' : state) + (match ? '' : ' dim'), pressed: on ? 'true' : 'false',
+label: u.id + ' ' + names[u.type] + ' ' + u.ping.toFixed(2) + '坪 ' + this.fmt(u.price) + '萬 ' + (u.taken || '可預約'),
+pick: () => { if (!u.taken && match) this.setState({ unit: u.id }); } };
+};
+const towers = ['A', 'B', 'C', 'D'].map((tw) => {
+const list = this.units.filter((u) => u.tower === tw);
+const codes = [...new Set(list.map((u) => u.code))];
+const open = list.filter((u) => !u.taken && (!s.type || u.type === s.type)).length;
+return { name: tw + ' 棟', note: '35–37F・可預約 ' + open + ' 戶', codes, span: codes.length,
+flat: [37, 36, 35].flatMap((fl) => [{ isFloor: true, isCell: false, floor: fl + 'F' },
+...codes.map((c) => ({ isFloor: false, isCell: true, ...cellOf(list.find((u) => u.code === c && u.floor === fl)) }))]) };
+});
+const stats = [37, 36, 35].map((fl) => {
+const list = this.units.filter((u) => u.floor === fl && (!s.type || u.type === s.type));
+return { floor: fl + 'F', open: list.filter((u) => !u.taken).length, held: list.filter((u) => u.taken === '保留中').length, sold: list.filter((u) => u.taken === '已售').length };
+});
+const pu = s.unit ? this.units.find((u) => u.id === s.unit) : null;
+return {
+segs, towers, stats,
+hasPick: !!pu, noPick: !pu, pickBorder: pu ? '#9AA6CF' : 'rgba(238,240,246,.16)',
+pick: pu ? { id: pu.id, type: names[pu.type], ping: pu.ping.toFixed(2), land: pu.land.toFixed(2), face: pu.face, price: this.fmt(pu.price), deposit: pu.type === 3 ? 70 : 50 } : {}
+};
+}
+}
+</script>
+</body>
+</html>
