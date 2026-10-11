@@ -142,10 +142,17 @@
     helmet.remove();
   }
 
+  function syncEvents(from, to) {
+    var ev = to.getAttribute('data-dc-ev');
+    if (ev) from.setAttribute('data-dc-ev', ev); else from.removeAttribute('data-dc-ev');
+  }
+
   function keepLiveState(from, to) {
     var tag = from.tagName;
-    if (tag === 'CANVAS') return false;
-    if (tag === 'VIDEO' && from.getAttribute('src') === to.getAttribute('src')) return false;
+    /* canvas bitmaps and playing videos are kept as-is, but their handler
+       indices change every render and must follow the new registry */
+    if (tag === 'CANVAS') { syncEvents(from, to); return false; }
+    if (tag === 'VIDEO' && from.getAttribute('src') === to.getAttribute('src')) { syncEvents(from, to); return false; }
     if (tag === 'DETAILS' && from.open && !to.hasAttribute('data-dc-b-open')) to.setAttribute('open', '');
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') {
       if (!to.hasAttribute('data-dc-b-value')) to.value = from.value;
