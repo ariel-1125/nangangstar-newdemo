@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>南港之星 線上刷卡小訂</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc><template>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;family=Noto+Serif+TC:wght@300;500&amp;display=swap">
+<style>
+body{margin:0;background:#070A12}
+.pay *{box-sizing:border-box}
+.pay a{color:#C9D0E6;text-decoration:none}
+.pay a:hover{color:#FFFFFF}
+.pay button{font-family:inherit;cursor:pointer}
+.pay a:focus-visible,.pay button:focus-visible,.pay input:focus-visible{outline:2px solid #EEF0F6;outline-offset:2px}
+.hero{position:sticky;top:73px;align-self:start;overflow:hidden;height:calc(100vh - 73px);min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;padding:48px clamp(20px,4vw,64px)}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,10,18,.72) 0%,rgba(7,10,18,.38) 55%,rgba(7,10,18,.1) 100%),linear-gradient(180deg,rgba(7,10,18,0) 30%,rgba(7,10,18,.55) 62%,rgba(7,10,18,.94) 100%)}
+.hero h1{text-shadow:0 2px 24px rgba(0,0,0,.55)}
+.hero>*:not(img){position:relative;z-index:1}
+.glass{background:rgba(14,20,36,.62);border:1px solid rgba(238,240,246,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.steps{display:flex;gap:6px;list-style:none;margin:0;padding:0;font-size:12px;letter-spacing:.1em}
+.steps li{flex:1 1 0;padding:10px 6px;border-top:2px solid rgba(238,240,246,.18);color:#8C95B0}
+.steps li.done{border-color:#9AA6CF;color:#C9D0E6}
+.steps li.now{border-color:#E7B66B;color:#E7B66B}
+.fld{display:flex;flex-direction:column;gap:8px;min-width:0}
+.fld label{font-size:13px;letter-spacing:.12em;color:#AEB6CC}
+.fld input{height:52px;padding:0 14px;background:#0E1424;border:1px solid rgba(238,240,246,.22);color:#EEF0F6;font:400 17px Jost,'Noto Sans TC',sans-serif;letter-spacing:.08em;border-radius:0;width:100%}
+.fld input::placeholder{color:#5F6884}
+.fld input.bad{border-color:#E07A5F}
+.card{position:relative;aspect-ratio:1.586/1;max-width:380px;width:100%;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;color:#F5F2E8;background:radial-gradient(120% 140% at 0% 0%,#2B3A63 0%,#141B30 55%,#0B0F1A 100%);border:1px solid rgba(238,240,246,.25);box-shadow:0 18px 50px rgba(0,0,0,.45);overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;background:url("assets/img/galaxy.webp") center/cover;opacity:.22;mix-blend-mode:screen}
+.card>*{position:relative}
+.spin{width:54px;height:54px;border-radius:50%;border:3px solid rgba(238,240,246,.18);border-top-color:#E7B66B;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:3s}}
+@media (max-width:980px){.split{grid-template-columns:minmax(0,1fr)!important}.hero{position:relative;top:auto;height:auto;min-height:440px}.hero::after{background:linear-gradient(180deg,rgba(7,10,18,.78) 0%,rgba(7,10,18,.5) 40%,rgba(7,10,18,.94) 100%)}}
+@media (max-width:640px){header{padding:12px 16px!important}header>span:last-child{display:none!important}.row2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}}
+</style>
+</helmet>
+
+<div class="pay" style="background: #070A12; color: #EEF0F6; font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif; min-height: 100vh">
+<header style="position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px clamp(16px, 3vw, 40px); background: rgba(7,10,18,.92); border-bottom: 1px solid rgba(238,240,246,.12)">
+<a href="index.html" aria-label="回首頁" style="display: flex; align-items: flex-end; gap: 12px; color: #EEF0F6">
+<span style="display: grid; grid-template-columns: repeat(2, 1fr); font-family: 'Noto Serif TC', serif; font-weight: 300; font-size: 20px; line-height: 1.15; letter-spacing: .08em"><span>南</span><span>港</span><span>之</span><span>星</span></span>
+<span style="font-family: Jost, Futura, sans-serif; font-size: 9px; letter-spacing: .3em; color: #AEB6CC; padding-bottom: 3px">VERTICAL<br>GALAXY</span>
+</a>
+<span style="display: flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: .12em; color: #AEB6CC"><span aria-hidden="true" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #7FD1A3"></span>SSL 加密連線</span>
+<span style="font-family: Jost, sans-serif; font-size: 15px; letter-spacing: .12em; padding: 10px 16px; border: 1px solid rgba(238,240,246,.4); user-select: all">02-2709-5888</span>
+</header>
+
+<div class="split" style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr)">
+
+<!-- 主視覺 -->
+<section class="hero" aria-label="預約戶別">
+<img src="assets/img/aerial-dusk.webp" alt="黃昏時的南港之星與台北天際線示意圖">
+<div style="display: flex; flex-direction: column; gap: 22px; max-width: 620px">
+<p style="margin: 0; font-family: Jost, sans-serif; font-size: 12px; letter-spacing: .42em; color: #E7B66B">ONLINE DEPOSIT</p>
+<h1 style="margin: 0; font-family: 'Noto Serif TC', serif; font-weight: 300; font-size: clamp(32px, 3.6vw, 52px); line-height: 1.35; letter-spacing: .14em">真正的自由，<br>是世界始終在身邊</h1>
+<p style="margin: 0; font-size: 15px; line-height: 1.9; letter-spacing: .1em; color: #DDE2F0">完成線上刷卡小訂，即為您保留這一戶，並立即建立預約單。</p>
+<div class="glass" style="padding: 20px 22px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 18px; font-variant-numeric: tabular-nums">
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; letter-spacing: .14em; color: #AEB6CC">預約戶別</span><span style="font-family: Jost, sans-serif; font-size: 24px; letter-spacing: .06em">{{o.unitId}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; letter-spacing: .14em; color: #AEB6CC">房型・坪數</span><span style="font-size: 17px; letter-spacing: .08em">{{o.typeName}}・{{o.pingTxt}} 坪</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; letter-spacing: .14em; color: #AEB6CC">預定總價</span><span style="font-family: Jost, sans-serif; font-size: 20px">{{o.priceTxt}} 萬</span></div>
+<div style="grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; padding-top: 12px; border-top: 1px solid rgba(238,240,246,.18); font-size: 13px; color: #C9D0E6"><span>訂購人　{{o.name}} {{o.title}}</span><span>定金總額 {{o.deposit}} 萬（含本次小訂 10 萬，餘額 7 日內補足）</span></div>
+</div>
+</div>
+</section>
+
+<!-- 付款 -->
+<main style="padding: 40px clamp(20px, 4vw, 56px) 56px; display: flex; flex-direction: column; gap: 26px; min-width: 0">
+<ol class="steps" aria-label="預約進度">
+<li class="done">01 選房</li><li class="done">02 資料・簽名</li><li class="now" aria-current="step">03 線上刷卡</li><li>04 預約單</li>
+</ol>
+
+<div role="note" style="padding: 12px 14px; border: 1px dashed rgba(231,182,107,.6); font-size: 13px; line-height: 1.8; color: #E7B66B">示意刷卡頁：不會實際扣款，請勿輸入真實卡號。可按「帶入測試卡」體驗流程。</div>
+
+<sc-if value="{{isForm}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 13px; letter-spacing: .16em; color: #AEB6CC">本次刷卡金額（小訂）</span><span style="font-family: Jost, sans-serif; font-weight: 300; font-size: 40px; letter-spacing: .04em">NT$100,000</span></div>
+<button type="button" onClick="{{fillTest}}" style="min-height: 40px; padding: 0 14px; background: transparent; border: 1px solid rgba(238,240,246,.35); color: #C9D0E6; font-size: 13px; letter-spacing: .1em">帶入測試卡</button>
+</div>
+
+<div class="card" aria-hidden="true">
+<div style="display: flex; justify-content: space-between; align-items: center"><span style="font-family: 'Noto Serif TC', serif; font-size: 15px; letter-spacing: .3em">南港之星</span><span style="font: 500 14px Jost, sans-serif; letter-spacing: .14em">{{brand}}</span></div>
+<span style="font: 300 22px Jost, sans-serif; letter-spacing: .14em; font-variant-numeric: tabular-nums">{{cardShow}}</span>
+<div style="display: flex; justify-content: space-between; font: 400 12px Jost, sans-serif; letter-spacing: .14em; text-transform: uppercase"><span>{{holderShow}}</span><span>{{expShow}}</span></div>
+</div>
+
+<form onSubmit="{{pay}}" style="display: flex; flex-direction: column; gap: 16px" novalidate>
+<div class="fld"><label for="c-name">持卡人姓名（英文，同卡片）</label><input id="c-name" class="{{err.name}}" type="text" autocomplete="off" value="{{f.name}}" onInput="{{onName}}" placeholder="WANG XIAO MING"></div>
+<div class="fld"><label for="c-num">信用卡卡號</label><input id="c-num" class="{{err.num}}" type="text" inputmode="numeric" autocomplete="off" value="{{f.num}}" onInput="{{onNum}}" placeholder="0000 0000 0000 0000" maxlength="19"></div>
+<div class="row2" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+<div class="fld"><label for="c-exp">有效期限（MM/YY）</label><input id="c-exp" class="{{err.exp}}" type="text" inputmode="numeric" autocomplete="off" value="{{f.exp}}" onInput="{{onExp}}" placeholder="MM/YY" maxlength="5"></div>
+<div class="fld"><label for="c-cvc">安全碼</label><input id="c-cvc" class="{{err.cvc}}" type="password" inputmode="numeric" autocomplete="off" value="{{f.cvc}}" onInput="{{onCvc}}" placeholder="卡片背面 3 碼" maxlength="4"></div>
+</div>
+<label style="display: flex; gap: 10px; align-items: flex-start; font-size: 13px; line-height: 1.8; color: #C9D0E6; cursor: pointer">
+<input type="checkbox" checked="{{f.agree}}" onChange="{{onAgree}}" style="width: 18px; height: 18px; margin-top: 3px; accent-color: #E7B66B">
+<span>本人同意以此卡支付南港之星 {{o.unitId}} 小訂新台幣 10 萬元，並已閱讀收款憑證條款；交易將經發卡銀行 3D 驗證。</span>
+</label>
+<sc-if value="{{errTxt}}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 0; font-size: 13px; color: #E07A5F">{{errTxt}}</p></sc-if>
+<button type="submit" style="min-height: 58px; border: 0; background: #E7B66B; color: #070A12; font-size: 16px; font-weight: 500; letter-spacing: .22em">確認付款 NT$100,000</button>
+<a href="reserve.html" style="align-self: center; font-size: 13px; letter-spacing: .12em; padding: 8px 0">返回修改預約資料</a>
+</form>
+</sc-if>
+
+<sc-if value="{{isPaying}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="min-height: 420px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; text-align: center">
+<div class="spin" aria-hidden="true"></div>
+<p style="margin: 0; font-size: 18px; letter-spacing: .16em">發卡銀行授權中</p>
+<p style="margin: 0; font-size: 13px; color: #AEB6CC; letter-spacing: .08em">請勿關閉或重新整理頁面</p>
+</div>
+</sc-if>
+
+<sc-if value="{{isDone}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; align-items: center; gap: 16px">
+<span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: #7FD1A3; color: #070A12; font-size: 28px; font-weight: 700">✓</span>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 22px; letter-spacing: .14em">刷卡成功</span><span style="font-size: 13px; color: #AEB6CC; letter-spacing: .08em">已為您保留 {{o.unitId}}，並建立預約單</span></div>
+</div>
+<div class="glass" style="padding: 18px 20px; display: grid; grid-template-columns: auto 1fr; gap: 10px 18px; font-size: 14px; color: #C9D0E6; font-variant-numeric: tabular-nums">
+<span style="color: #8C95B0">預約單號</span><span style="font-family: Jost, sans-serif; color: #EEF0F6; letter-spacing: .08em">{{r.no}}</span>
+<span style="color: #8C95B0">刷卡金額</span><span>NT$100,000</span>
+<span style="color: #8C95B0">信用卡</span><span>{{r.brand}}　末四碼 {{r.last4}}</span>
+<span style="color: #8C95B0">授權碼</span><span style="font-family: Jost, sans-serif">{{r.auth}}</span>
+<span style="color: #8C95B0">交易時間</span><span>{{r.timeTxt}}</span>
+</div>
+<p style="margin: 0; font-size: 13px; line-height: 1.8; color: #AEB6CC">{{countdownTxt}}</p>
+<a href="order.html" style="display: flex; align-items: center; justify-content: center; min-height: 56px; background: #EEF0F6; color: #070A12; font-size: 16px; font-weight: 500; letter-spacing: .22em">查看預約單</a>
+</div>
+</sc-if>
+</main>
+</div>
+</div>
+</template></x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+const SAMPLE = { unitId: 'A5-37F', code: 'A5', floor: 37, type: 2, typeName: '兩房', ping: 27.52, land: 2.15, price: 3250, deposit: 50,
+  name: '王小明', title: '先生', phone: '0912345678', mail: '', addr: '台北市南港區○○路○段○號', sig: '' };
+const luhn = (n) => { let s = 0; const d = n.split('').reverse().map(Number); d.forEach((x, i) => { if (i % 2) { x *= 2; if (x > 9) x -= 9; } s += x; }); return s % 10 === 0; };
+const brandOf = (n) => /^4/.test(n) ? 'VISA' : /^(5[1-5]|2[2-7])/.test(n) ? 'MASTERCARD' : /^35/.test(n) ? 'JCB' : /^3[47]/.test(n) ? 'AMEX' : 'CARD';
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+let o = null;
+try { o = JSON.parse(sessionStorage.getItem('ngs-order') || 'null'); } catch (err) {}
+this.order = Object.assign({}, SAMPLE, o || {});
+this.state = { step: 'form', f: { name: '', num: '', exp: '', cvc: '', agree: false }, err: {}, errTxt: '', left: 5 };
+}
+componentWillUnmount() { clearInterval(this.timer); }
+setF(k, v) { this.setState({ f: Object.assign({}, this.state.f, { [k]: v }), err: Object.assign({}, this.state.err, { [k]: '' }), errTxt: '' }); }
+validate() {
+const f = this.state.f, num = f.num.replace(/\s/g, ''), err = {};
+if (f.name.trim().length < 2) err.name = 'bad';
+if (!/^\d{15,16}$/.test(num) || !luhn(num)) err.num = 'bad';
+const m = f.exp.match(/^(\d{2})\/(\d{2})$/), now = new Date();
+if (!m || +m[1] < 1 || +m[1] > 12 || new Date(2000 + +m[2], +m[1], 0) < new Date(now.getFullYear(), now.getMonth(), 1)) err.exp = 'bad';
+if (!/^\d{3,4}$/.test(f.cvc)) err.cvc = 'bad';
+const msgs = { name: '持卡人姓名', num: '卡號', exp: '有效期限', cvc: '安全碼' };
+const bad = Object.keys(err).map((k) => msgs[k]);
+if (!f.agree) bad.push('同意刷卡授權');
+return { err, errTxt: bad.length ? '請確認：' + bad.join('、') : '' };
+}
+finish() {
+const f = this.state.f, num = f.num.replace(/\s/g, ''), t = new Date();
+const pad = (n) => String(n).padStart(2, '0');
+const r = { no: 'NGS' + String(t.getTime()).slice(-6), brand: brandOf(num), last4: num.slice(-4), auth: String(Math.floor(100000 + Math.random() * 900000)),
+time: t.getTime(), timeTxt: t.getFullYear() + '/' + pad(t.getMonth() + 1) + '/' + pad(t.getDate()) + ' ' + pad(t.getHours()) + ':' + pad(t.getMinutes()) };
+try { sessionStorage.setItem('ngs-order', JSON.stringify(Object.assign({}, this.order, { paid: r }))); } catch (err) {}
+this.setState({ step: 'done', r, left: 5 });
+this.timer = setInterval(() => {
+const left = this.state.left - 1;
+if (left <= 0) { clearInterval(this.timer); location.href = 'order.html'; return; }
+this.setState({ left });
+}, 1000);
+}
+renderVals() {
+const s = this.state, o = this.order, f = s.f;
+const digits = f.num.replace(/\s/g, '');
+return {
+o: Object.assign({}, o, { pingTxt: Number(o.ping).toFixed(2), priceTxt: Number(o.price).toLocaleString('zh-TW') }),
+f, err: s.err, errTxt: s.errTxt, r: s.r || {},
+isForm: s.step === 'form', isPaying: s.step === 'paying', isDone: s.step === 'done',
+brand: digits ? brandOf(digits) : 'CARD',
+cardShow: (digits + '•'.repeat(Math.max(0, 16 - digits.length))).replace(/(.{4})/g, '$1 ').trim(),
+holderShow: f.name.trim() || 'CARD HOLDER', expShow: f.exp || 'MM/YY',
+countdownTxt: '刷卡收據將寄至您的電子郵箱。' + s.left + ' 秒後自動前往預約單。',
+onName: (e) => this.setF('name', e.target.value.toUpperCase()),
+onNum: (e) => this.setF('num', e.target.value.replace(/\D/g, '').slice(0, 16).replace(/(.{4})(?=.)/g, '$1 ')),
+onExp: (e) => { const d = e.target.value.replace(/\D/g, '').slice(0, 4); this.setF('exp', d.length > 2 ? d.slice(0, 2) + '/' + d.slice(2) : d); },
+onCvc: (e) => this.setF('cvc', e.target.value.replace(/\D/g, '').slice(0, 4)),
+onAgree: (e) => this.setF('agree', e.target.checked),
+fillTest: () => this.setState({ f: { name: 'WANG XIAO MING', num: '4111 1111 1111 1111', exp: '12/' + String(new Date().getFullYear() + 3).slice(2), cvc: '123', agree: true }, err: {}, errTxt: '' }),
+pay: (e) => {
+e.preventDefault();
+const v = this.validate();
+if (v.errTxt) { this.setState(v); return; }
+this.setState({ step: 'paying', err: {}, errTxt: '' });
+try { document.querySelector('main').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (err) {}
+setTimeout(() => this.finish(), 1800);
+}
+};
+}
+}
+</script>
+</body>
+</html>

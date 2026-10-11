@@ -211,10 +211,8 @@ details[open] summary::after{content:'－'}
 <div class="fld"><label for="f-name">訂購人姓名</label><input id="f-name" type="text" autocomplete="name" placeholder="與身分證相同"></div>
 <div class="fld"><label for="f-title">稱謂</label><select id="f-title"><option>先生</option><option>小姐</option></select></div>
 <div class="fld"><label for="f-phone">聯絡電話（手機）</label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xxxxxxxx"></div>
-<div class="fld"><label for="f-mail">電子郵箱（選填）</label><input id="f-mail" type="email" autocomplete="email"></div>
+<div class="fld"><label for="f-mail">電子郵箱（刷卡收據與預約單寄送）</label><input id="f-mail" type="email" autocomplete="email"></div>
 <div class="fld" style="grid-column: 1 / -1"><label for="f-addr">聯絡地址</label><input id="f-addr" type="text" autocomplete="street-address" placeholder="收款憑證與契約寄送地址"></div>
-<div class="fld"><label for="f-reason">購買原因</label><select id="f-reason"><option>請選擇</option><option>區域地段</option><option>交通動線</option><option>生活機能</option><option>公司品牌</option><option>產品規劃</option><option>格局規劃</option><option>施工品質</option><option>安全管理</option><option>公共設施</option><option>付款方式</option><option>投資理財</option><option>置產</option><option>換屋</option><option>地理環境（景觀）</option><option>其他</option></select></div>
-<div class="fld"><label for="f-visit">到接待中心刷卡時段</label><select id="f-visit"><option>請專人與我約時間</option><option>平日上午</option><option>平日下午</option><option>假日上午</option><option>假日下午</option></select></div>
 </div>
 <p style="margin: 0; font-size: 13px; line-height: 1.8; color: #AEB6CC">身分證字號不在線上填寫，簽約時請攜帶身分證正本與印章至接待中心辦理。</p>
 </section>
@@ -234,7 +232,7 @@ details[open] summary::after{content:'－'}
 <div style="padding: 20px; background: #0E1424; border: 1px solid rgba(231,182,107,.45); display: flex; flex-direction: column; gap: 12px">
 <p style="margin: 0; font-size: 15px; font-weight: 500; letter-spacing: .14em; color: #E7B66B">送出前請確認以下重點</p>
 <ol style="margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.75; color: #DDE2F0">
-<li>線上送出後保留戶別 72 小時，請於期限內至接待中心刷卡<strong>小訂新台幣 10 萬元</strong>，逾時戶別將釋出。</li>
+<li>送出後將前往線上刷卡頁，<strong>立即刷卡小訂新台幣 10 萬元</strong>；刷卡成功即保留戶別並建立預約單，未完成刷卡不保留戶別。</li>
 <li>小訂後 7 日內須至接待中心<strong>補足定金</strong>（一房、兩房 50 萬元；三房 70 萬元），並於約定日期<strong>簽訂正式契約</strong>。</li>
 <li>未於期限內補足定金，收款憑證即解除，<strong>已付定金全額退還</strong>；已補足但未於約定日期完成簽約，<strong>依民法第 249 條辦理，定金可能不予退還</strong>。</li>
 <li>契約書於簽約前提供<strong>至少 5 日審閱期</strong>；簽約時請攜帶收款憑證、身分證正本與印章。</li>
@@ -247,10 +245,10 @@ details[open] summary::after{content:'－'}
 <details>
 <summary>預約到簽約的完整流程</summary>
 <div class="dt"><ol>
-<li>線上選房、填寫資料並親筆簽名後送出，系統保留戶別 72 小時。</li>
-<li>專人來電確認，您至接待中心刷卡小訂 10 萬元，建立預約單。</li>
+<li>線上選房、填寫資料並親筆簽名後，前往線上刷卡小訂 10 萬元。</li>
+<li>刷卡成功即保留戶別並建立預約單，可用預約單號與手機隨時查詢。</li>
 <li>代銷審核、業主審核通過後，列印正式預約單兩份，一份交您留存。</li>
-<li>您取回：契約審閱本、預約單、刷卡單收執聯、價目表。</li>
+<li>補足定金時於接待中心領取：契約審閱本、正式預約單、價目表。</li>
 <li>小訂後 7 日內補足定金；契約審閱 5 日以上後簽訂「房屋土地預定買賣契約書」。</li>
 <li>簽約後定金轉作房地價金之一部分，收款憑證收回作廢。</li>
 </ol></div>
@@ -290,20 +288,17 @@ details[open] summary::after{content:'－'}
 
 <!-- 06 送出 -->
 <section class="step" aria-labelledby="s6">
-<div class="step-h"><h2 id="s6">確認送出</h2><span class="step-n">06</span></div>
+<div class="step-h"><h2 id="s6">確認付款</h2><span class="step-n">06</span></div>
 <div style="display: flex; flex-direction: column; gap: 10px; padding: 20px; background: #0E1424; font-size: 14px; color: #C9D0E6; font-variant-numeric: tabular-nums">
 <div style="display: flex; justify-content: space-between; gap: 12px"><span>預約戶別</span><span style="color: #EEF0F6">{{sumUnit}}</span></div>
 <div style="display: flex; justify-content: space-between; gap: 12px"><span>預定總價</span><span style="color: #EEF0F6">{{sumPrice}}</span></div>
 <div style="display: flex; justify-content: space-between; gap: 12px"><span>定金總額（7 日內補足）</span><span style="color: #EEF0F6">{{sumDeposit}}</span></div>
-<div style="display: flex; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(238,240,246,.14)"><span>到場刷卡小訂</span><span style="font-family: Jost, sans-serif; font-size: 22px; color: #EEF0F6">NT$100,000</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(238,240,246,.14)"><span>線上刷卡小訂（立即付款）</span><span style="font-family: Jost, sans-serif; font-size: 22px; color: #EEF0F6">NT$100,000</span></div>
 </div>
 <sc-if value="{{missingTxt}}" hint-placeholder-val="{{ true }}">
 <p style="margin: 0; font-size: 13px; color: #E7B66B">{{missingTxt}}</p>
 </sc-if>
-<button type="button" onClick="{{submit}}" style="min-height: 56px; border: 0; background: {{btnBg}}; color: #070A12; font-size: 16px; font-weight: 500; letter-spacing: .24em">送出預約・保留戶別 72 小時</button>
-<sc-if value="{{submitted}}" hint-placeholder-val="{{ false }}">
-<div role="status" style="padding: 18px 20px; border: 1px solid #9AA6CF; background: #151D33; font-size: 14px; line-height: 1.8">已送出示意預約：{{sumUnit}}。專人將來電確認到場刷卡時間，戶別保留至送出後 72 小時。<a href="order.html" style="margin-left: 8px; color: #FFFFFF; box-shadow: inset 0 -1px 0 #FFFFFF">查看預約單</a><br><span style="color: #AEB6CC">（設計稿示意，未實際送出資料）</span></div>
-</sc-if>
+<button type="button" onClick="{{submit}}" style="min-height: 56px; border: 0; background: {{btnBg}}; color: #070A12; font-size: 16px; font-weight: 500; letter-spacing: .24em">前往刷卡・小訂 NT$100,000</button>
 </section>
 
 <footer style="padding-top: 28px; border-top: 1px solid rgba(238,240,246,.12); font-size: 12px; line-height: 2; letter-spacing: .06em; color: #8C95B0">
@@ -323,7 +318,7 @@ const VIDEOS = {
 class Component extends DCLogic {
 constructor(props) {
 super(props);
-this.state = { type: null, floor: null, unit: null, view: 'video', vtype: 1, agree: false, sigEmpty: true, submitted: false, tried: false };
+this.state = { type: null, floor: null, unit: null, view: 'video', vtype: 1, agree: false, sigEmpty: true, tried: false };
 this.drawing = false;
 this.canvas = null;
 const base = 'A1,3,42.54,3.32,5120,西北;A2,2,27.45,2.14,3190,北;A3,1,17.71,1.38,2080,北;A4,1,17.79,1.39,2090,北;A5,2,27.52,2.15,3220,北;A6,2+1,33.75,2.63,4020,東北;A7,2,26.97,2.1,3170,東;A8,2+1,34.22,2.67,4100,東南;A9,1,18.19,1.42,2120,南;A10,2,25.54,1.99,2970,南;A11,1,17.49,1.36,2060,南;A12,2,26.28,2.05,3080,南;A13,3,45.81,3.57,5480,西南;B1,3,43.11,3.36,5200,北;B2,2,27.16,2.12,3180,北;B3,1,17.36,1.35,2030,北;B4,1,17.5,1.36,2060,北;B5,2,26.87,2.1,3130,北;B6,2+1,32.9,2.57,3950,東北;B7,2,26.51,2.07,3110,東;B8,2+1,34.7,2.71,4170,東南;B9,1,17.93,1.4,2100,南;B10,1,17.5,1.36,2040,南;B11,2,25.73,2.01,3000,南;B12,2,26.33,2.05,3070,南;B13,3,46.26,3.61,5560,西南;B14,2,27.75,2.16,3230,西;C1,2+1,33.9,2.64,4090,北;C2,1,17.15,1.34,2010,北;C3,2,28.47,2.22,3350,北;C4,3,41.63,3.25,4970,東北;C5,1,17.91,1.4,2110,東;C6,1,17.9,1.4,2090,東;C7,1,17.79,1.39,2090,東;C8,2,24.64,1.92,2870,東;C9,2,25.23,1.97,2960,西;C10,1,18.2,1.42,2130,西;C11,2,24.95,1.95,2910,西;D1,2,25.49,1.99,2980,東;D2,3,44.7,3.49,5350,東南;D3,1,18.54,1.45,2170,南;D4,2,26.24,2.05,3080,南;D5,2+1,35.78,2.79,4280,西南;D6,3,45.31,3.53,5470,西;D7,1,19.26,1.5,2270,西';
@@ -351,12 +346,12 @@ const open = this.units.filter((u) => !u.taken);
 const types = [1, 2, 3].map((t) => {
 const list = open.filter((u) => u.type === t);
 return { name: names[t], desc: descs[t], count: list.length, from: this.fmt(Math.min(...list.map((u) => u.price))) + ' 萬起',
-cls: s.type === t ? 'on' : '', pick: () => this.setState({ type: t, vtype: t, unit: null, submitted: false, view: 'video' }) };
+cls: s.type === t ? 'on' : '', pick: () => this.setState({ type: t, vtype: t, unit: null, view: 'video' }) };
 });
 const floors = [35, 36, 37].map((f) => {
 const n = open.filter((u) => u.floor === f && (!s.type || u.type === s.type)).length;
 return { label: f + 'F', note: (s.type ? names[s.type] + ' ' : '') + '可預約 ' + n + ' 戶', cls: s.floor === f ? 'on' : '',
-pick: () => this.setState({ floor: f, unit: null, submitted: false, view: 'plan' }) };
+pick: () => this.setState({ floor: f, unit: null, view: 'plan' }) };
 });
 const onFloor = s.floor ? this.units.filter((u) => u.floor === s.floor) : [];
 const markers = onFloor.map((u) => {
@@ -364,12 +359,12 @@ const match = !s.type || u.type === s.type;
 const on = s.unit === u.id;
 return { code: u.code, x: u.x, y: u.y, label: u.id + ' ' + names[u.type] + (u.taken ? ' ' + u.taken : ''),
 cls: on ? 'on' : (u.taken || !match ? 'dim' : ''),
-pick: () => { if (!u.taken && match) this.setState({ unit: u.id, type: u.type, submitted: false }); } };
+pick: () => { if (!u.taken && match) this.setState({ unit: u.id, type: u.type }); } };
 });
 const list = onFloor.filter((u) => s.type && u.type === s.type).map((u) => ({
 id: u.id, ping: u.ping.toFixed(2), face: u.face, price: this.fmt(u.price), status: u.taken || '可預約',
 cls: s.unit === u.id ? 'on' : (u.taken ? 'off' : ''),
-pick: () => { if (!u.taken) this.setState({ unit: u.id, submitted: false }); }
+pick: () => { if (!u.taken) this.setState({ unit: u.id }); }
 }));
 const pu = s.unit ? this.units.find((u) => u.id === s.unit) : null;
 const pick = pu ? { id: pu.id, type: names[pu.type], ping: pu.ping.toFixed(2), land: pu.land.toFixed(2), face: pu.face, price: this.fmt(pu.price), deposit: pu.type === 3 ? 70 : 50 } : {};
@@ -392,18 +387,31 @@ needTypeFloor: !s.type || !s.floor, hasUnits: !!(s.type && s.floor), hasPick: !!
 sumUnit: pu ? pu.id + '　' + names[pu.type] + '　' + pu.ping.toFixed(2) + ' 坪' : '尚未選擇',
 sumPrice: pu ? this.fmt(pu.price) + ' 萬元' : '—',
 sumDeposit: pu ? (pu.type === 3 ? 70 : 50) + ' 萬元（含小訂 10 萬）' : '—',
-missingTxt: s.tried && !ready ? '尚未完成：' + missing.join('、') : '',
+missingTxt: s.tried && (!ready || (s.formErr || []).length) ? '尚未完成：' + missing.concat(s.formErr || []).join('、') : '',
 btnBg: ready ? '#EEF0F6' : '#5B6278',
-submitted: s.submitted,
 agree: s.agree,
 toggleAgree: (e) => this.setState({ agree: e.target.checked }),
 sigEmpty: s.sigEmpty,
 sigDown: (e) => { this.canvas = e.currentTarget; this.drawing = true; const c = this.canvas.getContext('2d'); const p = this.pt(e); c.lineWidth = 3; c.lineCap = 'round'; c.lineJoin = 'round'; c.strokeStyle = '#141824'; c.beginPath(); c.moveTo(p.x, p.y); try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) {} },
 sigMove: (e) => { if (!this.drawing) return; const c = e.currentTarget.getContext('2d'); const p = this.pt(e); c.lineTo(p.x, p.y); c.stroke(); if (this.state.sigEmpty) this.setState({ sigEmpty: false }); },
 sigUp: () => { this.drawing = false; },
-sigClear: () => { if (this.canvas) this.canvas.getContext('2d').clearRect(0, 0, this.canvas.width, this.canvas.height); this.setState({ sigEmpty: true, submitted: false }); },
-submit: () => { if (ready) this.setState({ submitted: true, tried: true }); else this.setState({ tried: true }); }
+sigClear: () => { if (this.canvas) this.canvas.getContext('2d').clearRect(0, 0, this.canvas.width, this.canvas.height); this.setState({ sigEmpty: true }); },
+submit: () => {
+const v = (id) => ((document.getElementById(id) || {}).value || '').trim();
+const formErr = [!v('f-name') && '訂購人姓名', !/^09\d{8}$/.test(v('f-phone').replace(/[\s-]/g, '')) && '手機號碼'].filter(Boolean);
+if (!ready || formErr.length) { this.setState({ tried: true, formErr }); return; }
+this.goPay(pu, names);
+}
 };
+}
+goPay(pu, names) {
+const val = (id) => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+let sig = '';
+try { if (this.canvas) sig = this.canvas.toDataURL('image/png'); } catch (err) {}
+const order = { unitId: pu.id, code: pu.code, floor: pu.floor, type: pu.type, typeName: names[pu.type], ping: pu.ping, land: pu.land, price: pu.price,
+deposit: pu.type === 3 ? 70 : 50, name: val('f-name') || '王小明', title: val('f-title') || '先生', phone: val('f-phone'), mail: val('f-mail'), addr: val('f-addr'), sig };
+try { sessionStorage.setItem('ngs-order', JSON.stringify(order)); } catch (err) {}
+location.href = 'payment.html';
 }
 pt(e) {
 const el = e.currentTarget; const r = el.getBoundingClientRect();

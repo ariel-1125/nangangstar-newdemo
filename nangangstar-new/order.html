@@ -75,7 +75,7 @@ body{margin:0;background:#070A12}
 </div>
 <form onSubmit="{{lookup}}" style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
 <label for="q-id" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">預約單號</label>
-<input id="q-id" class="qf" type="text" value="NGS000181" placeholder="預約單號" style="width: 140px; font-family: Jost, sans-serif; letter-spacing: .08em">
+<input id="q-id" class="qf" type="text" value="{{o.no}}" placeholder="預約單號" style="width: 140px; font-family: Jost, sans-serif; letter-spacing: .08em">
 <label for="q-phone" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">訂購人手機</label>
 <input id="q-phone" class="qf" type="tel" placeholder="訂購人手機" style="width: 150px">
 <button type="submit" style="height: 44px; padding: 0 20px; border: 0; background: #EEF0F6; color: #070A12; font-size: 14px; font-weight: 500; letter-spacing: .16em">查詢</button>
@@ -84,8 +84,8 @@ body{margin:0;background:#070A12}
 
 <section aria-label="審核進度" style="display: flex; flex-direction: column; gap: 10px; padding: 18px 20px; background: #0B1020; border: 1px solid rgba(238,240,246,.14)">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 13px; color: #C9D0E6">
-<span>預約單號 <b style="font: 500 15px Jost, sans-serif; letter-spacing: .08em; color: #EEF0F6">NGS000181</b>　A5-37F　兩房</span>
-<span style="color: #E7B66B">目前進度：業主審核中，審核完成後可列印正式收款憑證</span>
+<span>預約單號 <b style="font: 500 15px Jost, sans-serif; letter-spacing: .08em; color: #EEF0F6">{{o.no}}</b>　{{o.unitId}}　{{o.typeName}}</span>
+<span style="color: #E7B66B">{{progressText}}</span>
 </div>
 <div class="chain">
 <sc-for list="{{chain}}" as="c" hint-placeholder-count="5">
@@ -110,25 +110,25 @@ body{margin:0;background:#070A12}
 <div class="wm" aria-hidden="true">提案示意</div>
 <div class="side-v">收款憑證一式二份：{{copyName}}。</div>
 <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 12px">
-<span class="fill" style="font-size: 12px; font-family: Jost, sans-serif">20261011143205</span>
+<span class="fill" style="font-size: 12px; font-family: Jost, sans-serif">{{o.stamp}}</span>
 <span style="font-size: 25px; font-weight: 700; letter-spacing: .22em">潤泰創新國際股份有限公司</span>
-<span style="text-align: right; font: 600 17px Jost, sans-serif; letter-spacing: .06em; color: #C8102E">NGS000181</span>
+<span style="text-align: right; font: 600 17px Jost, sans-serif; letter-spacing: .06em; color: #C8102E">{{o.no}}</span>
 </div>
 <div style="display: flex; justify-content: space-between; align-items: baseline; margin: 2px 0 6px">
 <span style="font-size: 17px; letter-spacing: .14em">預售收款憑證</span>
-<span>西元 <span class="fill big">2026</span> 年 <span class="fill big">10</span> 月 <span class="fill big">11</span> 日</span>
+<span>西元 <span class="fill big">{{o.y}}</span> 年 <span class="fill big">{{o.m}}</span> 月 <span class="fill big">{{o.d}}</span> 日</span>
 </div>
 
 <div class="box">
 <div class="row" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px">
-<span class="fill big" style="min-width: 7em; text-align: center">王小明</span>
-<span style="display: inline-flex; flex-direction: column; line-height: 1.25; font-size: 12.5px"><span>先生</span><s>小姐</s></span>
+<span class="fill big" style="min-width: 7em; text-align: center">{{o.name}}</span>
+<span style="display: inline-flex; flex-direction: column; line-height: 1.25; font-size: 12.5px"><sc-if value="{{o.isMr}}" hint-placeholder-val="{{ true }}"><span>先生</span><s>小姐</s></sc-if><sc-if value="{{o.isMs}}" hint-placeholder-val="{{ false }}"><s>先生</s><span>小姐</span></sc-if></span>
 <span>（以下簡稱買方）</span><span style="margin-left: auto">潤泰創新國際股份有限公司（以下簡稱賣方）</span>
 </div>
 <div class="row">
-<p style="margin: 0">預約戶別「<span class="fill big">南港之星</span>」案　<span class="fill big">A5</span> 棟　<span class="fill big">三十七</span> 樓　<span class="fill big">壹</span> 戶</p>
-<p style="margin: 0">房屋面積共計 <span class="fill big">27.52</span> 坪（含主建物、附屬建物、共同使用）<s>（不含雨遮　　坪）</s></p>
-<p style="margin: 0">土地面積共計 <span class="fill big">2.15</span> 坪</p>
+<p style="margin: 0">預約戶別「<span class="fill big">南港之星</span>」案　<span class="fill big">{{o.code}}</span> 棟　<span class="fill big">{{o.floorCn}}</span> 樓　<span class="fill big">壹</span> 戶</p>
+<p style="margin: 0">房屋面積共計 <span class="fill big">{{o.pingTxt}}</span> 坪（含主建物、附屬建物、共同使用）<s>（不含雨遮　　坪）</s></p>
+<p style="margin: 0">土地面積共計 <span class="fill big">{{o.landTxt}}</span> 坪</p>
 </div>
 <div class="row"><s>預約停車位：地上　樓　編號：　　號　位。<span class="ck"></span>平面式 <span class="ck"></span>機械式</s>　<span class="fill" style="font-size: 12.5px">本期不含車位</span></div>
 <div class="row">定金總金額　　新台幣　<span class="fill big">{{depositCn}}</span></div>
@@ -136,14 +136,14 @@ body{margin:0;background:#070A12}
 <p style="margin: 0">已付定金金額　新台幣　<span class="fill big">{{paidCn}}</span></p>
 <p style="margin: 0; display: flex; justify-content: space-between; gap: 12px"><s>（現金：　　　　元）</s><s>（匯款：日期　　　　金額　　　　　元）</s></p>
 <p style="margin: 0"><s>（支票：　　銀行　　分行帳號　　　　票號　　　　日期　　　　金額　　　　元）</s></p>
-<p style="margin: 0">（刷卡：<span class="fill">國泰</span>銀行　卡號末四碼 <span class="fill">0043</span>　金額 <span class="fill">100,000</span> 元　調閱編號 <span class="fill">00005</span>）</p>
+<p style="margin: 0">（刷卡：<span class="fill">{{o.bank}}</span>　卡號末四碼 <span class="fill">{{o.last4}}</span>　金額 <span class="fill">100,000</span> 元　調閱編號 <span class="fill">{{o.auth}}</span>）</p>
 </div>
 <div class="tm">
 <p class="ind">一、本戶房地及停車位預定總價新台幣：<span class="fill">{{totalCn}}</span>，明細如下：</p>
 <p class="ind2">（一）房屋及土地預定總價新台幣：<span class="fill">{{houseCn}}</span>（不含雨遮）。</p>
 <p class="ind2">（二）停車位預定總價新台幣：<span class="fill">{{parkCn}}</span>。</p>
 <p class="ind">二、雙方預定條件如下：</p>
-<p class="ind2">買方應於西元 <span class="fill big">2026</span> 年 <span class="fill big">10</span> 月 <span class="fill big">18</span> 日至 <span style="display: inline-flex; flex-direction: column; line-height: 1.2; vertical-align: middle; text-align: center; font-size: 12.5px"><span>該案工地</span><s>賣方公司</s></span> 辦理 <span style="display: inline-flex; flex-direction: column; line-height: 1.2; vertical-align: middle; text-align: center; font-size: 12.5px"><span>補足定金</span><s>簽訂正式契約</s></span> 手續，</p>
+<p class="ind2">買方應於西元 <span class="fill big">{{o.ty}}</span> 年 <span class="fill big">{{o.tm}}</span> 月 <span class="fill big">{{o.td}}</span> 日至 <span style="display: inline-flex; flex-direction: column; line-height: 1.2; vertical-align: middle; text-align: center; font-size: 12.5px"><span>該案工地</span><s>賣方公司</s></span> 辦理 <span style="display: inline-flex; flex-direction: column; line-height: 1.2; vertical-align: middle; text-align: center; font-size: 12.5px"><span>補足定金</span><s>簽訂正式契約</s></span> 手續，</p>
 <p class="ind2">本收款憑證於繳付定金後生效，如買方僅繳付定金之一部，於應補足定金日期前仍未補足定金全額或未於所定簽約日期完成正式契約「房屋土地預定買賣契約書」簽訂，本收款憑證即為解除，賣方得將上開房地及停車位另行銷售，並依下述聯絡資訊擇一通知買方，其原繳付定金之處理如下：</p>
 <p class="ind2">1. 屬未補足定金全額者，賣方退還買方原繳付之定金。</p>
 <p class="ind2">2. 屬未於所定簽約日期完成正式契約簽訂者，依民法第249條辦理。</p>
@@ -156,18 +156,18 @@ body{margin:0;background:#070A12}
 </div>
 <div class="tm two" style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px">
 <div style="display: flex; flex-direction: column">
-<div class="kv"><span>買 方 姓 名：</span><span class="fill">王小明</span></div>
-<div style="height: 64px; display: flex; align-items: center; padding-left: 2.5em"><span style="font: 400 30px/1 'Noto Serif TC', serif; color: #2A2220; transform: skewX(-12deg); letter-spacing: .1em; opacity: .85">王小明</span><span style="margin-left: 10px; font-size: 11px; color: #6F6360">（線上簽名）</span></div>
+<div class="kv"><span>買 方 姓 名：</span><span class="fill">{{o.name}}</span></div>
+<div style="height: 72px; display: flex; align-items: center; padding-left: 2.5em"><sc-if value="{{o.sig}}" hint-placeholder-val="{{ false }}"><img src="{{o.sig}}" alt="買方線上親筆簽名" style="height: 68px; width: auto; max-width: 70%; mix-blend-mode: multiply"></sc-if><sc-if value="{{o.noSig}}" hint-placeholder-val="{{ true }}"><span style="font: 400 30px/1 'Noto Serif TC', serif; color: #2A2220; transform: skewX(-12deg); letter-spacing: .1em; opacity: .85">{{o.name}}</span></sc-if><span style="margin-left: 10px; font-size: 11px; color: #6F6360">（線上簽名）</span></div>
 <div class="kv"><span>身分證字號：</span><span style="color: #6F6360; font-size: 12.5px">簽約時查驗正本</span></div>
-<div class="kv"><span>聯 絡 電 話：</span><span class="fill">0912-***-678</span></div>
-<div class="kv"><span>聯 絡 地 址：</span><span class="fill">台北市南港區○○路○段○號</span></div>
+<div class="kv"><span>聯 絡 電 話：</span><span class="fill">{{o.phoneMasked}}</span></div>
+<div class="kv"><span>聯 絡 地 址：</span><span class="fill">{{o.addr}}</span></div>
 </div>
 <div style="display: flex; flex-direction: column">
 <div class="kv"><span>賣　　　方：</span><span>潤泰創新國際股份有限公司</span></div>
 <div class="kv"><span>公 司 地 址：</span><span>台北市八德路二段308號11樓之1</span></div>
 <div class="kv"><span>公 司 電 話：</span><span>81619888</span></div>
 <div class="kv"><span>服 務 專 線：</span><span>27095888</span></div>
-<div class="kv"><span>經辦人及電話：</span><span class="fill">李○○　09xx-xxx-321</span></div>
+<div class="kv"><span>經辦人及電話：</span><span class="fill">{{o.agent}}</span></div>
 <div class="kv"><span>經　紀　人：</span><span><span class="fill">凃美珍</span>（簽章專用）經紀人證號<br>(93)北縣字第000962號(換發)</span></div>
 </div>
 </div>
@@ -176,14 +176,14 @@ body{margin:0;background:#070A12}
 
 <div style="display: flex; justify-content: space-between; gap: 16px; margin-top: 12px">
 <span>主管審核：<span class="fill" style="font-size: 12.5px">{{reviewNote}}</span></span>
-<span>經辦人：<span class="fill">李○○</span></span>
+<span>經辦人：<span class="fill">{{o.agentName}}</span></span>
 </div>
 <div style="display: flex; justify-content: space-between; gap: 16px; margin-top: 18px; font-size: 11.5px; color: #6F6360">
 <span>潤澤社會，泰安民生</span><span style="font-family: Jost, sans-serif">A-4-CS01-25-收款憑證(預)-D-20260730</span>
 </div>
 </article>
 
-<p style="margin: 0; font-size: 12px; line-height: 1.9; color: #8C95B0">線上預約單依潤泰「預售收款憑證」格式產生，資料為提案示意。業主審核完成後可列印正式憑證；身分證字號不於線上填寫，簽約時攜帶正本與印章至接待中心辦理。</p>
+<p style="margin: 0; font-size: 12px; line-height: 1.9; color: #8C95B0">線上預約單依潤泰「預售收款憑證」格式產生，小訂 10 萬元已於線上刷卡完成，資料為提案示意。業主審核完成後可列印正式憑證；身分證字號不於線上填寫，簽約時攜帶正本與印章至接待中心辦理。</p>
 </main>
 </div>
 </template></x-dc>
@@ -195,27 +195,53 @@ const w = String(Math.round(wan) % 10000).padStart(4, '0');
 const yi = withYi ? DIG[Math.floor(wan / 10000)] + '億' : '';
 return yi + DIG[+w[0]] + '仟' + DIG[+w[1]] + '佰' + DIG[+w[2]] + '拾' + DIG[+w[3]] + '萬' + '零仟元整';
 };
+const SAMPLE = { no: 'NGS000181', unitId: 'A5-37F', code: 'A5', floor: 37, type: 2, typeName: '兩房', ping: 27.52, land: 2.15, price: 3250, deposit: 50,
+  name: '王小明', title: '先生', phone: '0912345678', addr: '台北市南港區○○路○段○號', sig: '', created: Date.UTC(2026, 9, 11, 6, 32),
+  bank: '國泰銀行', last4: '0043', auth: '00005', agent: '李○○　09xx-xxx-321', agentName: '李○○', stage: 3,
+  times: ['10/11 14:32', '10/11 16:05', '10/12 10:20'] };
+const CN_NUM = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+const floorCn = (n) => (n >= 20 ? CN_NUM[Math.floor(n / 10)] : '') + '十' + (n % 10 ? CN_NUM[n % 10] : '');
+const pad = (n) => String(n).padStart(2, '0');
+const md = (t) => (t.getMonth() + 1) + '/' + t.getDate() + ' ' + pad(t.getHours()) + ':' + pad(t.getMinutes());
+function loadOrder() {
+  let o = null;
+  try { o = JSON.parse(sessionStorage.getItem('ngs-order') || 'null'); } catch (err) {}
+  if (!o || !o.paid) return SAMPLE;
+  const p = o.paid, t = new Date(p.time);
+  return Object.assign({}, SAMPLE, o, { no: p.no, created: p.time, bank: p.brand + ' 信用卡', last4: p.last4, auth: p.auth,
+    agent: '銷售確認後帶入', agentName: '銷售確認後帶入', stage: 1, times: [md(t)] });
+}
 class Component extends DCLogic {
 constructor(props) {
 super(props);
-this.state = { copy: 1, stage: 3 };
-this.order = { price: 3250, parking: 0, deposit: 50, paid: 10 };
+this.o = loadOrder();
+this.state = { copy: 1, stage: this.o.stage };
 }
 renderVals() {
-const s = this.state, o = this.order;
-const STAGES = [['預約單送出', '10/11 14:32'], ['銷售確認', '10/11 16:05'], ['代銷審核', '10/12 10:20'], ['業主審核', '—'], ['正式憑證列印', '—']];
-const chain = STAGES.map(([name, at], i) => ({ name, at: i < s.stage ? at : '—', mark: i < s.stage ? '✓' : String(i + 1),
+const s = this.state, o = this.o;
+const c = new Date(o.created), due = new Date(o.created + 7 * 864e5);
+const digits = String(o.phone || '').replace(/\D/g, '');
+const STAGES = ['預約單送出・線上刷卡', '銷售確認', '代銷審核', '業主審核', '正式憑證列印'];
+const chain = STAGES.map((name, i) => ({ name, at: i < s.stage ? (o.times[i] || '—') : '—', mark: i < s.stage ? '✓' : String(i + 1),
 cls: i < s.stage ? 'on' : (i === s.stage ? 'now' : '') }));
 const copies = [[1, '第一聯　買方收執聯'], [2, '第二聯　公司存查聯']].map(([k, label]) => ({
 label, cls: s.copy === k ? 'on' : '', pressed: s.copy === k ? 'true' : 'false', pick: () => this.setState({ copy: k }) }));
+const progress = ['', '目前進度：小訂已刷卡完成，等待銷售人員確認（專人將於 1 個工作天內來電）', '目前進度：代銷審核中', '目前進度：業主審核中，審核完成後可列印正式收款憑證', '已完成，可列印正式收款憑證'];
 return {
-chain, copies,
+chain, copies, progressText: progress[s.stage] || '',
+o: Object.assign({}, o, {
+stamp: c.getFullYear() + pad(c.getMonth() + 1) + pad(c.getDate()) + pad(c.getHours()) + pad(c.getMinutes()) + pad(c.getSeconds()),
+y: c.getFullYear(), m: c.getMonth() + 1, d: c.getDate(), ty: due.getFullYear(), tm: due.getMonth() + 1, td: due.getDate(),
+floorCn: floorCn(o.floor), pingTxt: Number(o.ping).toFixed(2), landTxt: Number(o.land).toFixed(2),
+isMr: o.title !== '小姐', isMs: o.title === '小姐', noSig: !o.sig,
+phoneMasked: digits.length >= 10 ? digits.slice(0, 4) + '-***-' + digits.slice(-3) : (o.phone || '—'),
+addr: o.addr || '—' }),
 copyName: s.copy === 1 ? '第一聯買方收執聯' : '第二聯公司存查聯',
 depositCn: cnMoney(o.deposit, false) + '。',
-paidCn: cnMoney(o.paid, false) + '。',
-totalCn: cnMoney(o.price + o.parking, true),
+paidCn: cnMoney(10, false) + '。',
+totalCn: cnMoney(o.price, true),
 houseCn: cnMoney(o.price, true),
-parkCn: cnMoney(o.parking, true),
+parkCn: cnMoney(0, true),
 reviewNote: s.stage >= 4 ? '已核章' : '業主審核完成後核章',
 lookup: (e) => { e.preventDefault(); },
 doPrint: () => { try { window.print(); } catch (err) {} }
